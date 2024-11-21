@@ -30,56 +30,60 @@ So if you extract the names of the private lobbyists from the PDF and parse them
 That's the workflow I settled on, using:
 - [`playwright`](https://playwright.dev/python/) to manage the browser automation
 - [`pdfplumber`](https://github.com/jsvine/pdfplumber) to extract data from the PDFs
-- [`probablepeople`](https://github.com/datamade/probablepeople) to parse names (results cached in `private/parsed_names.json`)
+- [`probablepeople`](https://github.com/datamade/probablepeople) to parse names (results cached in [`private/parsed_names.json`](private/parsed_names.json))
 - [`usaddress-scourgify`](https://github.com/GreenBuildingRegistry/usaddress-scourgify) to parse addresses
 
+For the private lobbyists, the final step is to check the scraped data against the data extracted from the PDF to make sure nothing is missing.
+
 ### Results
-- [`south-dakota-lobbyists-private.json`](south-dakota-lobbyists-private.json)
-    - Each record is a _lobbyist registration_ for one legislative session, meaning the same lobbyist could appear more than once if they lobbied for multiple legislative sessions
-    - Record count: **8,553** registration records, including 786 that don't reference any financial disclosure forms. Collectively, the rest of them point to 17,678 disclosure forms
-    - Date range: 2012-01-01 to 2024-11-20
-    - Record layout:
-        - `url`: Lobbyist registration detail page URL
-        - `year`: Registration year
-        - `registration_number`: Unique identifier for this registration record
-        - `lobbyist_name`: Attempted parse with [probablepeople](https://github.com/datamade/probablepeople), with results cached in [`private/parsed-names.json`](private/parsed-names.json)
-            - `lobbyist_name.name_full` (always present)
-            - `lobbyist_name.name_first`
-            - `lobbyist_name.name_middle`
-            - `lobbyist_name.name_last`
-        - `lobbyist_status`: "ACTIVE" or "UNREGISTERED"
-        - `lobbyist_employment_date`
-        - `lobbyist_phone`
-        - `lobbyist_email`
-        - `lobbyist_address`: Attempted parse with [`usaddress-scourgify`](https://github.com/GreenBuildingRegistry/usaddress-scourgify):
-            - `lobbyist_address.address_full` (always present)
-            - `lobbyist_address.address_line_1`
-            - `lobbyist_address.address_line_2`
-            - `lobbyist_address.city`
-            - `lobbyist_address.state`
-            - `lobbyist_address.postal_code`
-        - `lobbyist_occupation`
-        - `lobbyist_type`: "PRIVATE"
-        - `employer_name`
-        - `employer_agent_name`
-        - `employer_registration_date`
-        - `employer_authorization_date`
-        - `employer_lobbying_subjects`
-        - `employer_registration_status`: "ACTIVE", "UNREGISTERED", "WITHDRAWN" or "PENDING AUTHORIZATION"
-        - `employer_address`: Attempted parse with [`usaddress-scourgify`](https://github.com/GreenBuildingRegistry/usaddress-scourgify)
-            - `employer_address.address_full` (always present)
-            - `employer_address.address_line_1`
-            - `employer_address.address_line_2`
-            - `employer_address.city`
-            - `employer_address.state`
-            - `employer_address.postal_code`
-        - `filings`: A list of filings attached to this registration record. Each filing includes:
-            - `filing_type`: "Lobbyist Expense Report", "Employer Expense Report" or "Withdrawal"
-            - `filing_date`
-            - `filing_number`: Filing ID
-            - `filing_url`: PDF link
-            - `filing_guid`: Unique identifier, taken from the `id` parameter in `filing_url`
-- [`south-dakota-lobbyists-public.csv`](south-dakota-lobbyists-public.csv)
+
+#### [`private/south-dakota-lobbyists-private.json`](private/south-dakota-lobbyists-private.json)
+- Each record is a _lobbyist registration_ for one legislative session, meaning the same lobbyist could appear more than once if they lobbied for multiple legislative sessions
+- Record count: **8,553** registration records, including 786 that don't reference any financial disclosure forms. The rest of them collectively point to 17,678 disclosure forms
+- Date range: 2012-01-01 to 2024-11-20
+- Record layout:
+    - `url`: Lobbyist registration detail page URL
+    - `year`: Registration year
+    - `registration_number`: Unique identifier for this registration record
+    - `lobbyist_name`: Attempted parse with [probablepeople](https://github.com/datamade/probablepeople), with results cached in [`private/parsed-names.json`](private/parsed-names.json)
+        - `lobbyist_name.name_full` (always present)
+        - `lobbyist_name.name_first`
+        - `lobbyist_name.name_middle`
+        - `lobbyist_name.name_last`
+    - `lobbyist_status`: "ACTIVE" or "UNREGISTERED"
+    - `lobbyist_employment_date`
+    - `lobbyist_phone`
+    - `lobbyist_email`
+    - `lobbyist_address`: Attempted parse with [`usaddress-scourgify`](https://github.com/GreenBuildingRegistry/usaddress-scourgify)
+        - `lobbyist_address.address_full` (always present)
+        - `lobbyist_address.address_line_1`
+        - `lobbyist_address.address_line_2`
+        - `lobbyist_address.city`
+        - `lobbyist_address.state`
+        - `lobbyist_address.postal_code`
+    - `lobbyist_occupation`
+    - `lobbyist_type`: "PRIVATE"
+    - `employer_name`
+    - `employer_agent_name`
+    - `employer_registration_date`
+    - `employer_authorization_date`
+    - `employer_lobbying_subjects`
+    - `employer_registration_status`: "ACTIVE", "UNREGISTERED", "WITHDRAWN" or "PENDING AUTHORIZATION"
+    - `employer_address`: Attempted parse with [`usaddress-scourgify`](https://github.com/GreenBuildingRegistry/usaddress-scourgify)
+        - `employer_address.address_full` (always present)
+        - `employer_address.address_line_1`
+        - `employer_address.address_line_2`
+        - `employer_address.city`
+        - `employer_address.state`
+        - `employer_address.postal_code`
+    - `filings`: A list of filings attached to this registration record. Each filing includes:
+        - `filing_type`: "Lobbyist Expense Report", "Employer Expense Report" or "Withdrawal"
+        - `filing_date`
+        - `filing_number`: Filing ID
+        - `filing_url`: PDF link
+        - `filing_guid`: Unique identifier, taken from the `id` parameter in `filing_url`
+
+#### [`public/south-dakota-lobbyists-public.csv`](public/south-dakota-lobbyists-public.csv)
     - Record count: 4,960
     - Date range: 2012 to 2025
     - Record layout:
