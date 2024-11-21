@@ -1,241 +1,965 @@
 from pathlib import Path
-from datetime import date
+from datetime import datetime
 import time
-import zipfile
-import io
 import csv
+import json
+import itertools
+import random
+from urllib.parse import urljoin, urlparse, parse_qs
 
 from playwright.sync_api import sync_playwright
+import pdfplumber
+import probablepeople as pp
+import requests
+from bs4 import BeautifulSoup
+from scourgify import normalize_address_record
+from scourgify.exceptions import (
+    UnParseableAddressError,
+    AddressNormalizationError
+)
 
 
-start_url = 'https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistSearch.aspx'
+SEARCH_URL = 'https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistSearch.aspx'
 
-dir_private = Path('private')
-filepath_csv_private = 'south-dakota-lobbyists-private.csv'
-filepath_csv_public = 'south-dakota-lobbyists-public.csv'
+SELECTOR_BUTTON_SEARCH = '#ctl00_MainContent_SearchButton'
+SELECTOR_BUTTON_PRINT = '#ctl00_MainContent_PrintButton'
+SELECTOR_YEARS = '#ctl00_MainContent_slctYears'
+SELECTOR_TABLE_ROWS = 'select[name="DataTables_Table_0_length"]'
+SELECTOR_TABLE = 'table#DataTables_Table_0'
+SELECTOR_LAST_NAME = '#ctl00_MainContent_txtLastName'
 
-TODAY = date.today()
-THIS_YEAR = TODAY.year
+REQ_HEADERS = {
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:131.0) Gecko/20100101 Firefox/131.0'
+}
+
+NOW = datetime.now()
+THIS_YEAR = NOW.year
+
+# registration records >= this year
+# will be redownloaded to check for new info
+FIRST_YEAR_DOWNLOAD = THIS_YEAR
+
+config = {
+    'private': {
+        'pdf_vertical_lines': {
+            'year': (0, 70),
+            'expense_report_lobbyist': (70, 122),
+            'expense_report_employer': (122, 180),
+            'lobbyist_name': (180, 343),
+            'employer': (343, 500),
+            'status': (500,)
+        }
+    },
+    'public': {
+        'pdf_vertical_lines': {
+            'year': (0, 75),
+            'lobbyist_name': (75, 305),
+            'agency': (305,)
+        }
+    }
+}
 
 
-def download():
+for lobbyist_type in config.keys():
+    folder = Path(lobbyist_type)
+    filetype = 'csv' if lobbyist_type == 'public' else 'json'
 
-    select_id = 'ctl00_MainContent_slctYears'
+    config[lobbyist_type]['selector_radio'] = f'#ctl00_MainContent_chkSearchBy{lobbyist_type.title()}'
+    config[lobbyist_type]['dir'] = folder
+    config[lobbyist_type]['filepath_pdf'] = folder / f'search-results-{lobbyist_type}.pdf'
+    config[lobbyist_type]['filepath_data'] = folder / f'south-dakota-lobbyists-{lobbyist_type}.{filetype}'
 
-    headers_public = [
-        'year',
-        'name_last',
-        'name_first',
-        'state_agency_or_tribe'
-    ]
+    if lobbyist_type == 'private':
+        config[lobbyist_type]['dir_pages'] = folder / 'detail-pages'
+        config[lobbyist_type]['dir_last_names'] = folder / 'last-names'
+        config[lobbyist_type]['dir_forms'] = folder / 'disclosure-forms'
 
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False)
-        page = browser.new_page()
-        page.goto(start_url)
+FILEPATH_PARSED_NAMES = Path('private') / 'parsed-names.json'
 
-        # private lobbyists
-        select = page.locator(f'select#{select_id}')
-        options = select.locator('option').all()
-        button = page.locator('a#ctl00_MainContent_ExportButton')
+with open(FILEPATH_PARSED_NAMES, 'r') as infile:
+    parsed_names = json.load(infile)
 
-        for opt in options:
-            label = opt.inner_text()
+# mapping probablepeople keys
+name_key_map = {
+    'FirstInitial': 'name_first',
+    'GivenName': 'name_first',
+    'MiddleInitial': 'name_middle',
+    'MiddleName': 'name_middle',
+    'Nickname': 'name_nickname',
+    'PrefixOther': 'name_prefix',
+    'SuffixGenerational': 'name_suffix',
+    'SuffixOther': 'name_suffix',
+    'Surname': 'name_last'
+}
 
-            if label.lower() == 'all years':
-                continue
+# for probablepeople lookups
+name_fixes = {
+    'REBECCA CHRISTIANSEN, LPC-MH,': 'REBECCA CHRISTIANSEN, LPC-MH, LPC, NCC',
+    'CHRISTOPHER HEMINGWAY-': 'CHRISTOPHER HEMINGWAY-TURNER',
+    'MARY C. MICHELLE': 'MARY C. MICHELLE LOUNSBERY',
+    'DARRELL D. REVOKED -': 'DARRELL D. REVOKED - RASCHKE',
+    'ROB MONSON': 'ROB L MONSON'
+}
 
-            filename_zip = dir_private / f'{label}.zip'
-            filename_txt = dir_private / f'{label}.txt'
 
-            if filename_txt.exists() and int(label) < THIS_YEAR:
-                continue
+class ResultsPDF:
+    ''' A PDF exported from the S.D. Secretary
+        of State's webite containing a table of data
+        on state lobbyists
+    '''
+    def __init__(self, filepath):
+        if not isinstance(filepath, Path):
+            filepath = Path(filepath)
 
-            select.select_option(label=label)
+        self.filepath = filepath
+        is_private = 'private' in str(filepath)
 
-            with page.expect_download() as download_info:
-                button.click()
+        self.report_type = 'private' if is_private else 'public'
+        self.config = config[self.report_type]
 
-            download = download_info.value
-            download.save_as(filename_zip)
+        self.pdf = pdfplumber.open(self.filepath)
 
-            print(f'Downloaded {str(filename_zip)}')
-            time.sleep(2)
+        self.gather_crops()
 
-            # unzip
-            with zipfile.ZipFile(filename_zip.resolve()) as zf:
-                txt = zf.namelist()[0]
-                with io.TextIOWrapper(zf.open(txt), encoding='utf-8') as infile, open(filename_txt, 'w') as outfile:
-                    outfile.write(infile.read())
+        self.data = []
+        self.collect_data()
 
-                    print(f'Unzipped to {filename_txt}')
+        self.pdf.close()
 
-            # delete zipfile
-            filename_zip.unlink()
+    def get_page_crops(self, page):
+        ''' given a page, get cropped sections representing each record'''
 
-        # now grab public lobbyist data
-        page.locator('#ctl00_MainContent_chkSearchByPublic').check()
+        breaks = [
+            # page top
+            page.bbox[1],
 
-        time.sleep(2)
+            # page bottom
+            page.bbox[3]
+        ]
 
-        select_public = page.locator(f'select#{select_id}')
+        # add the tops/bottoms of gray rectangles
+        for rect in page.rects:
+            breaks.append(rect['top'])
+            breaks.append(rect['bottom'])
 
-        options_public = [x.inner_text() for x in select_public.locator('option').all()]
+        # and sort
+        breaks.sort()
 
-        button_public = page.locator('a#ctl00_MainContent_ExportButton')
+        # get a list of overlapping pairs
+        a, b = itertools.tee(breaks)
+        next(b, None)
 
-        data_public = []
+        # and build the coordinates
+        coords = [(0, x[0], page.width, x[1]) for x in zip(a, b)]
 
-        for label in options_public:
+        # list to gather crops
+        crops = []
 
-            select_public = page.locator(f'select#{select_id}')
+        for c in coords:
+            crop = page.crop(c)
+            if crop.extract_text():
+                crops.append(crop)
 
-            if label.lower() == 'all years':
-                continue
+        return {page.page_number: crops}
 
-            select_public.select_option(label=label)
+    def gather_crops(self):
+        ''' process the PDF to gather a list of cropped sections, each representing a single record
+         '''
 
-            page.locator('a#ctl00_MainContent_SearchButton').click()
+        data_crops = {}
 
-            table = page.locator('table#DataTables_Table_0')
+        for page in self.pdf.pages:
 
-            if 'no records found' in table.inner_text().lower():
-                continue
+            if page.page_number == 1:
 
-            print(f'Grabbing public lobbyist data for {label}')
+                # crop out top material on first page
+                # by targeting the lines above the table
+                bottom = page.lines[0].get('bottom') + 1
 
-            results_select = page.locator('select[name="DataTables_Table_0_length"]')
-
-            results_select.select_option(value="1000")
-
-            table = page.locator('table#DataTables_Table_0')
-
-            rows = table.locator('tbody > tr').all()
-
-            for row in rows:
-                year, name, agency = [x.inner_text() for x in row.locator('td').all()]
-
-                last, rest = [x.strip() for x in name.split(',')]
-
-                data = [year, last, rest, agency]
-
-                data_public.append(
-                    dict(zip(headers_public, data))
+                page = page.crop(
+                    (0, bottom, page.width, page.height)
                 )
 
-            time.sleep(2)
+            crops = self.get_page_crops(page)
+            data_crops = {**data_crops, **crops}
 
-        data_public.sort(
+            page.close()
+
+        self.data_crops = data_crops
+
+        return self
+
+    def parse_data_public(self):
+        if self.report_type != 'public':
+            return
+
+        line_breaks = self.config['pdf_vertical_lines']
+
+        for page_num in self.data_crops:
+            for crop in self.data_crops[page_num]:
+
+                d = {}
+
+                for key in line_breaks:
+                    breaks = line_breaks[key]
+
+                    vertical_break_start = breaks[0]
+
+                    if key == 'agency':
+                        vertical_break_end = crop.width
+                    else:
+                        vertical_break_end = breaks[1]
+
+                    section_crop = crop.crop(
+                        (
+                            vertical_break_start,
+                            crop.bbox[1],
+                            vertical_break_end,
+                            crop.bbox[3]
+                        )
+                    )
+
+                    section_text = section_crop.extract_text(layout=True).upper()
+
+                    section_lines = [x.strip() for x in section_text.splitlines() if x.strip()]
+
+                    section_text = ' '.join(
+                        section_text.split()
+                    )
+
+                    if key == 'agency':
+
+                        d['agency'] = ' '.join(section_lines[0].split())
+
+                        agency_address = ' '.join(section_lines[1:])
+
+                        agency_address = ' '.join(agency_address.split())
+
+                        d['agency_address'] = agency_address
+                        continue
+
+                    d[key] = section_text
+
+                self.data.append(d)
+
+        self.data.sort(
+            key=lambda x: (x['agency'], x['year'])
+        )
+
+        return self
+
+    def parse_data_private(self):
+        if self.report_type != 'private':
+            return
+
+        line_breaks = self.config['pdf_vertical_lines']
+        data = []
+
+        for page_num in self.data_crops:
+
+            crops = self.data_crops[page_num]
+            for crop in crops:
+
+                d = {}
+
+                for key in line_breaks:
+                    breaks = line_breaks[key]
+
+                    vertical_break_start = breaks[0]
+
+                    if key == 'status':
+                        vertical_break_end = crop.width
+                    else:
+                        vertical_break_end = breaks[1]
+
+                    section_crop = crop.crop(
+                        (
+                            vertical_break_start,
+                            crop.bbox[1],
+                            vertical_break_end,
+                            crop.bbox[3]
+                        )
+                    )
+
+                    section_text = section_crop.extract_text(layout=True).upper()
+
+                    section_lines = [x.strip() for x in section_text.splitlines() if x.strip()]
+
+                    section_text = ' '.join(
+                        section_text.split()
+                    )
+
+                    if key == 'lobbyist_name':
+                        name = ' '.join(section_lines[0].split())
+
+                        name = name_fixes.get(name, name)
+
+                        address_lobbyist = ' '.join(
+                            section_lines[1:]
+                        )
+
+                        d['address_lobbyist'] = ' '.join(
+                            address_lobbyist.split()
+                        )
+
+                        parsed_name = parsed_names.get(name)
+
+                        if parsed_name:
+                            parsed_name['name_full'] = name
+                            d['lobbyist_name'] =parsed_name
+                            continue
+
+                        if 'TEST ' in name:
+                            d['skip'] = True
+                            continue
+
+                        try:
+                            results = pp.tag(name)
+
+                            if results[1] != 'Person':
+                                raise Exception(f'Unparsed name: {name}')
+
+                            data_out = {name_key_map.get(x): results[0].get(x) for x in results[0].keys()}
+
+                            parsed_names[name] = data_out
+
+                            data_out['name_full'] = name
+
+                            d['lobbyist_name'] = data_out
+
+                            continue
+
+                        except pp.RepeatedLabelError:
+                            raise Exception(f'Unparsed name: {name}')
+
+                    d[key] = section_text
+
+                if d.get('skip'):
+                    continue
+
+                self.data.append(d)
+
+        self.data.sort(
             key=lambda x: (
-                x['year'],
-                x['name_last'].lower(),
-                x['name_first'].lower()
+                x.get('lobbyist_name').get('name_last'),
+                x.get('lobbyist_name').get('name_first')
             )
         )
 
-        with open(filepath_csv_public, 'w') as outfile:
-            writer = csv.DictWriter(outfile, fieldnames=headers_public)
-            writer.writeheader()
-            writer.writerows(data_public)
+        with open(FILEPATH_PARSED_NAMES, 'w') as outfile:
+            json.dump(
+                parsed_names,
+                outfile,
+                indent=4
+            )
 
-        print(f'Wrote {str(filepath_csv_public)}')
+        print(f'Wrote {str(FILEPATH_PARSED_NAMES.resolve())}')
+
+        return self
+
+    def collect_data(self):
+        if not self.data_crops:
+            self.gather_crops()
+
+        if self.report_type == 'public':
+            self.parse_data_public()
+
+        if self.report_type == 'private':
+            self.parse_data_private()
+
+        return self
+
+    def write_data(self):
+        ''' only writing out public data at this stage '''
+        if self.report_type != 'public':
+            return
+
+        if not self.data:
+            self.collect_data()
+
+        filepath_out = self.config['filepath_data'].resolve()
+
+        with open(filepath_out, 'w', encoding='utf=8', newline='') as outfile:
+            writer = csv.DictWriter(
+                outfile,
+                fieldnames=list(self.data[0].keys())
+            )
+            writer.writeheader()
+            writer.writerows(self.data)
+
+        print(f'- Wrote {len(self.data):,} records to {filepath_out}')
+
+        return self
+
+    def __str__(self):
+        return self.filepath
+
+
+def download_pdfs():
+    ''' Downloads PDFs with lists of public and private lobbyists '''
+
+    targets = [(config[x]['selector_radio'], config[x]['filepath_pdf']) for x in config]
+
+    with sync_playwright() as p:
+        browser = p.firefox.launch(headless=False)
+        page = browser.new_page()
+        page.goto(SEARCH_URL, timeout=0)
+
+        for pair in targets:
+            page.locator(pair[0]).click()
+            time.sleep(1)
+
+            page.locator(SELECTOR_YEARS).select_option('0')
+
+            page.locator(SELECTOR_BUTTON_SEARCH).click()
+            time.sleep(1)
+
+            with page.expect_download(timeout=0) as download_info:
+                page.locator(SELECTOR_BUTTON_PRINT).click(timeout=0)
+
+                download = download_info.value
+                download.save_as(pair[1])
+
+                print(f'Downloaded {pair[1]}')
 
         browser.close()
 
-def assemble_private():
+    return [x[1] for x in targets]
 
-    data_processed = []
-    str_current = ''
 
-    # have to process the files one row at a time to
-    # handle unescaped newlines
-    for txt in dir_private.glob('*.txt'):
-        with open(txt.resolve(), 'r', newline='') as infile:
-            lines = infile.readlines()
-            csv_headers = [x.strip() for x in lines[0].split('|')]
+def get_detail_urls_private(last_names=[]):
+    ''' loop over a list of last names to plug into
+        the search page and scrape the data into an intermediate file in `last_names`
+    '''
 
-            for line in lines[1:]:
-                if not str_current:
-                    str_current = line
+    dir_last_names = config['private']['dir_last_names']
+    plural = 'name' if len(last_names) == 1 else 'names'
 
-                ls = [' '.join(x.split()) for x in line.split('|')]
-                firstval = ' '.join(ls[0].split())
+    print(f'Searching {len(last_names):,} {plural} ...')
 
-                try:
-                    # if it's a year, append str and start a new one
-                    if int(firstval) and len(firstval) == 4:
+    finished = {}
 
-                        # print(str_current)
-                        row_data = [' '.join(x.split()) for x in str_current.split('|')]
+    try:
+        with sync_playwright() as p:
+            browser = p.firefox.launch(headless=False)
+            page = browser.new_page()
+            page.goto(SEARCH_URL, timeout=0)
 
-                        if not any(row_data):
-                            continue
+            for lname in last_names:
+                print(f'Searching {lname} ...')
 
-                        data_processed.append(
-                            dict(
-                                zip(
-                                    csv_headers,
-                                    row_data
-                                )
-                            )
-                        )
-                        str_current = ' '.join(line.split())
-                except ValueError:
-                    # it's not a year, so it belongs with the previous line
-                    str_current += ' ' + ' '.join(line.split()).strip()
+                page.locator(SELECTOR_LAST_NAME).fill(lname)
+                page.locator(SELECTOR_YEARS).select_option('0')
 
-    data_processed.sort(
-        key=lambda x: (
-            x['YEAR'],
-            x['LOBBYIST_LAST_NAME'].lower(),
-            x['LOBBYIST_FIRST_NAME'].lower()
+                page.locator(SELECTOR_BUTTON_SEARCH).click()
+                time.sleep(1)
+
+                page.locator(SELECTOR_TABLE_ROWS).select_option('1000')
+
+                table = page.locator(SELECTOR_TABLE)
+                html = table.inner_html()
+
+                soup = BeautifulSoup(html, 'html.parser')
+                rows = soup.find_all('tr')[1:]
+
+                if not rows:
+                    raise Exception(f'No results for {lname}')
+
+                plural = 'records' if len(rows) > 1 else 'record'
+
+                print(f'- Found {len(rows):,} {plural}')
+
+                registrations = []
+
+                for row in rows:
+                    (
+                        year,
+                        reg_no,
+                        reg_status,
+                        lobbyist_name,
+                        lobbyist_city_state_zip,
+                        lobbyist_phone_email,
+                        employer,
+                        employer_address,
+                        employer_city_state_zip
+                    ) = row.find_all('td')
+
+                    link = reg_no.find('a').get('href')
+                    url = urljoin(SEARCH_URL, link)
+
+                    detail_page_deets = {
+                        'year': int(year.text),
+                        'registration_number': reg_no.text,
+                        'url': url,
+                        'registration_status': reg_status.text,
+                        'lobbyist_name': lobbyist_name.text,
+                        'lobbyist_city_state_zip': lobbyist_city_state_zip.text,
+                        'lobbyist_phone_email': lobbyist_phone_email.text,
+                        'employer': employer.text,
+                        'employer_address': employer_address.text,
+                        'employer_city_state_zip': employer_city_state_zip.text
+                    }
+
+                    registrations.append(detail_page_deets)
+
+                urls_collected = {lname: registrations}
+
+                finished = {
+                    **finished,
+                    **urls_collected
+                }
+
+                filepath_url_detail = dir_last_names / f'{lname}.json'
+
+                with open(filepath_url_detail, 'w') as outfile:
+                    json.dump(
+                        urls_collected,
+                        outfile,
+                        indent=4
+                    )
+
+                print(f'- Wrote {filepath_url_detail}')
+                print()
+
+                time.sleep(random.uniform(1, 3))
+
+            browser.close()
+    except Exception as e:
+        print(e)
+        time.sleep(5)
+        print('\n😅 Ope! Rebooting ...\n')
+
+        unfinished = [x for x in last_names if x not in finished.keys()]
+
+        random.shuffle(unfinished)
+        get_detail_urls_private(last_names=unfinished)
+
+    return finished
+
+
+def scrape_registration_page(html_filepath):
+
+    if not isinstance(html_filepath, Path):
+        html_filepath = Path(html_filepath)
+
+    with open(html_filepath, 'r') as infile:
+        html = infile.read()
+
+    soup = BeautifulSoup(html, 'html.parser')
+    registration_guid = html_filepath.stem
+
+    d = {
+        'url': f'https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN={registration_guid}',
+        'registration_guid': registration_guid
+    }
+
+    reg_id_block_text = soup.find(
+        'span', 
+        {'id': 'ctl00_MainContent_lblRegistrationNo'}
+    ).text
+
+    year, rest = reg_id_block_text.split('-')
+    _, registration_num = rest.split(':')
+
+    d['year'] = int(year)
+    d['registration_number'] = ' '.join(registration_num.split())
+
+    span_map = {
+        'lobbyist_name': 'ctl00_MainContent_txtLobbyistName',
+        'lobbyist_status': 'ctl00_MainContent_txtStatus',
+        'lobbyist_employment_date': 'ctl00_MainContent_txtEmploymentDate',
+        'lobbyist_phone': 'ctl00_MainContent_txtPhone',
+        'lobbyist_email': 'ctl00_MainContent_txtEmail',
+        'lobbyist_address': 'ctl00_MainContent_txtResidenceAddress',
+        'lobbyist_occupation': 'ctl00_MainContent_txtOccupation',
+        'lobbyist_type': 'ctl00_MainContent_txtType',
+        'employer_name': 'ctl00_MainContent_txtEmployerName',
+        'employer_agent_name': 'ctl00_MainContent_txtAgentName',
+        'employer_registration_date': 'ctl00_MainContent_txtRegistrationDate',
+        'employer_authorization_date': 'ctl00_MainContent_txtAuthorizationDate',
+        'employer_lobbying_subjects': 'ctl00_MainContent_txtSubject',
+        'employer_registration_status': 'ctl00_MainContent_txtRegistrationStatus',
+        'employer_address': 'ctl00_MainContent_txtEmployerAddress'
+    }
+
+    for key in span_map:
+        val = soup.find(
+            'span',
+            {'id': span_map[key]}
         )
-    )
 
-    with open(filepath_csv_private, 'w') as outfile:
-        writer = csv.DictWriter(outfile, fieldnames=csv_headers)
-        writer.writeheader()
-        writer.writerows(data_processed)
+        val_txt = ' '.join(
+            val.text.split()
+        ).upper()
 
-    print(f'Wrote {filepath_csv_private}')
+        if val_txt and '_date' in key:
+            val_txt = datetime.strptime(
+                val_txt,
+                '%m/%d/%Y'
+            ).date().isoformat()
+
+        if val and '_address' in key:
+            val_txt = val.get_text(
+                strip=True,
+                separator='\n'
+            ).splitlines()
+            val_txt = ' '.join(val_txt).upper()
+
+        d[key] = val_txt
+
+    lobbyist_name = ' '.join(
+        d['lobbyist_name'].split()
+    ).upper()
+
+    name_parsed = parsed_names.get(lobbyist_name)
+
+    d['lobbyist_name'] = {
+        'name_full': lobbyist_name,
+        **name_parsed
+    }
+
+    try:
+        parsed_address_lobbyist = normalize_address_record(
+            d['lobbyist_address']
+        )
+        d['lobbyist_address'] = {
+            'address_full': d['lobbyist_address'],
+            **parsed_address_lobbyist
+        }
+    except (
+        UnParseableAddressError, 
+        AddressNormalizationError
+    ):
+        d['lobbyist_address'] = {
+            'address_full': d['lobbyist_address']
+        }
+
+    try:
+        parsed_address_employer = normalize_address_record(
+            d['employer_address']
+        )
+        d['employer_address'] = {
+            'address_full': d['employer_address'],
+            **parsed_address_employer
+        }
+    except (
+        UnParseableAddressError, 
+        AddressNormalizationError
+    ):
+        d['employer_address'] = {
+            'address_full': d['employer_address']
+        }
+
+    table = soup.find('table')
+    rows = table.find_all('tr')[1:]
+
+    filings = []
+
+    for row in rows:
+        doc = {}
+
+        # "filing detail", the last item in the row, is always blank
+        filing_type, filing_date, document_number, _ = row.find_all('td')
+
+        doc['filing_type'] = ' '.join(
+            filing_type.text.split()
+        )
+
+        if filing_date:
+            doc['filing_date'] = datetime.strptime(
+                filing_date.text.strip(),
+                '%m/%d/%Y'
+            ).date().isoformat()
+
+        doc['filing_number'] = ' '.join(
+            document_number.text.split()
+        )
+
+        doc_link = document_number.find('a')
+
+        if doc_link:
+            document_url = urljoin(
+                'https://sosenterprise.sd.gov/BusinessServices/Business/',
+                Path(doc_link.get('href')).name
+            )
+
+            doc['filing_url'] = document_url
+
+            document_url_parsed = urlparse(document_url)
+            doc_id = parse_qs(document_url_parsed.query)['id'][0]
+
+            doc['filing_guid'] = doc_id
+
+            # download the filing if it doesn't
+            # exist locally
+            filepath_filing = config['private']['dir_forms'] / f'{doc_id}.pdf'
+
+            if not filepath_filing.exists():
+                with requests.get(
+                    document_url,
+                    headers=REQ_HEADERS,
+                    stream=True
+                ) as r, open(filepath_filing, 'wb') as fd:
+
+                    r.raise_for_status()
+
+                    for chunk in r.iter_content():
+                        fd.write(chunk)
+
+                time.sleep(random.uniform(1, 3))
+
+                print(f'- Wrote {str(filepath_filing)}')
+
+                doc['new'] = True
+
+        filings.append(doc)
+
+    d['filings'] = filings
+
+    return d
+
+
+def scrape_private_data():
+    data_out = []
+    new_filings = []
+
+    for html_file in config['private']['dir_pages'].glob('*.html'):
+
+        scraped_data = scrape_registration_page(html_file)
+
+        for filing in scraped_data.get('filings'):
+            if filing.get('new'):
+                new_filings.append(filing)
+                del filing['new']
+
+        data_out.append(scraped_data)
+
+    fpath = config['private']['filepath_data'].resolve()
+
+    with open(fpath, 'w') as outfile:
+        json.dump(
+            data_out,
+            outfile,
+            indent=4
+        )
+
+    print(f'Wrote {str(fpath)}')
+
+    return {
+        'scraped_data': data_out,
+        'new_filings': new_filings
+    }
 
 
 def build_readme():
-    tmpl = '''# South Dakota lobbyist data
 
-_Updated {updated_date}_
+    file_in, file_out = Path('readme.template'), Path('README.md')
 
-You can download data on South Dakota lobbyist registrations since {earliest_year} using [this state website](https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistSearch.aspx), but a) you can't export all the data at once, b) the download for each year is a zipfile containing a single pipe-delimited text file, some with records that include unescaped newlines, and c) you can't export the public lobbyist information as data.
+    with open(file_in, 'r') as infile:
+        tmpl = infile.read()
 
-This project [uses `playwright`](download.py) to navigate the form and collect lobbyist registration data in two tidy files:
-- [`south-dakota-lobbyists-private.csv`](south-dakota-lobbyists-private.csv) ({count_private:,} records)
-- [`south-dakota-lobbyists-public.csv`](south-dakota-lobbyists-public.csv) ({count_public:,} records)
+    with open(config['private']['filepath_data'], 'r') as infile:
+        data_private = json.load(infile)
+
+    zero_filings = []
+    filings_count = 0
+    lobbyist_employment_dates = []
+
+    for reg in data_private:
+
+        empl_date = datetime.fromisoformat(
+            reg['lobbyist_employment_date']
+        ).date()
+
+        if empl_date.year > 2011 and empl_date.year <= THIS_YEAR:
+            lobbyist_employment_dates.append(empl_date)
+
+        reg_no = reg.get('registration_number')
+        filings = reg.get('filings')
+
+        if not filings:
+            zero_filings.append(reg)
+            continue
+
+        for filing in reg.get('filings'):
+            filings_count += 1
+
+    registrations_min_date = min(lobbyist_employment_dates)
+    registrations_max_date = max(lobbyist_employment_dates)
+
+    date_range_private = f'{registrations_min_date.isoformat()} to {registrations_max_date.isoformat()}'
+
+    with open(config['public']['filepath_data'], 'r') as infile:
+        data_public = list(csv.DictReader(infile))
+
+    years = set([x.get('year') for x in data_public])
+    date_range_public = f'{min(years)} to {max(years)}'
+
+    to_replace = (
+        ('{% UPDATED %}', NOW.strftime('%B %d, %Y')),
+        ('{% COUNT_PRIVATE_REGISTRATIONS %}', f'{len(data_private):,}'),
+        ('{% COUNT_PRIVATE_REGISTRATION_NO_FILINGS %}', f'{len(zero_filings):,}'),
+        ('{% COUNT_PRIVATE_FILINGS %}', f'{filings_count:,}'),
+        ('{% DATE_RANGE_PRIVATE %}', date_range_private),
+        ('{% COUNT_PUBLIC_REGISTRATIONS %}', f'{len(data_public):,}'),
+        ('{% DATE_RANGE_PUBLIC %}', date_range_public),
+    )
+
+    for pair in to_replace:
+        tmpl = tmpl.replace(*pair)
+
+    with open(file_out, 'w') as outfile:
+        outfile.write(tmpl)
+
+    print(f'- Wrote {str(file_out)}')
+
+    return file_out
+
+
+def download_detail_pages(urls=[]):
+    ''' given a list of URLs for registration
+        detail pages, download each page that
+        hasn't already been downloaded
+
+        return a list of newly downloaded registrations
     '''
 
-    with open(filepath_csv_private, 'r') as infile:
-        data_private = list(csv.DictReader(infile))
-        count_private = len(data_private)
-        earliest_year_private = min([int(x['YEAR']) for x in data_private])
+    '''
+    # to read from local files instead ...
+    urls = []
 
-    with open(filepath_csv_public, 'r') as infile:
-        data_public = list(csv.DictReader(infile))
-        count_public = len(data_public)
-        earliest_year_public = min([int(x['year']) for x in data_public])
+    for d in config['private']['dir_last_names'].glob('*.json'):
+        with open(d, 'r') as infile:
+            registration_data = json.load(infile)
+        for x in registration_data:
+            urls.extend(
+                [x.get('url') for x in registration_data[x]]
+            )
+    '''
 
-    earliest_year = min([earliest_year_private, earliest_year_public])
+    new_downloads = []
 
-    with open('README.md', 'w') as outfile:
-        outfile.write(
-            tmpl.format(
-                updated_date=TODAY.strftime('%B %d, %Y'),
-                earliest_year=earliest_year,
-                count_public=count_public,
-                count_private=count_private
+    for url in set(urls):
+        parsed_url = urlparse(url)
+        registration_id = parse_qs(parsed_url.query)['CN'][0]
+
+        detail_page_filepath = (config['private']['dir_pages'] / f'{registration_id}.html').resolve()
+
+        if detail_page_filepath.exists():
+            continue
+
+        req = requests.get(
+            url,
+            headers=REQ_HEADERS
+        )
+
+        req.raise_for_status()
+
+        time.sleep(random.uniform(1, 3))
+
+        with open(detail_page_filepath, 'w') as outfile:
+            outfile.write(req.text)
+
+        print(f'- Wrote {detail_page_filepath}')
+
+        new_downloads.append(url)
+
+    return new_downloads
+
+
+def vet_results_private(scraped_data=[], pdf_data=[]):
+    ''' compare `pdf_data`, which is canon, with `scraped_data`
+
+    The list of lobbyist names, and the years they've lobbied, should match
+
+    returns True if it doesn't throw
+    '''
+
+    lookup_scraped = {}
+    for record in scraped_data:
+        name_full = record.get('lobbyist_name').get('name_full')
+        if not lookup_scraped.get(name_full):
+            lookup_scraped[name_full] = []
+
+        lookup_scraped[name_full].append(record.get('year'))
+
+    lookup_pdf = {}
+    for record in pdf_data:
+        name_full = record.get('lobbyist_name').get('name_full')
+        if not lookup_pdf.get(name_full):
+            lookup_pdf[name_full] = []
+
+        lookup_pdf[name_full].append(record.get('year'))
+
+    # make sure all the registration records are present
+    for name in lookup_pdf:
+        pdf_years = ', '.join(
+            sorted(
+                [str(x) for x in lookup_pdf[name]]
+            )
+        )
+        scraped_years = ', '.join(
+            sorted(
+                [str(x) for x in lookup_scraped[name]]
             )
         )
 
+        if pdf_years != scraped_years:
+            msg = f'Missing registration data for {name}\nScraped from PDF: {pdf_years}\nScraped from website: {scraped_years}'
+
+            raise Exception(msg)
+
+    return True
+
 
 if __name__ == '__main__':
-    download()
-    assemble_private()
+
+    download_pdfs()
+
+    print('\nProcessing public lobbyist file ...')
+    public_lobbyists = ResultsPDF(
+        config['public']['filepath_pdf']
+    )
+    public_lobbyists.write_data()
+
+    print('\nProcessing private lobbyist file ...')
+    private_lobbyists = ResultsPDF(
+        config['private']['filepath_pdf']
+    )
+
+    print(f'- Parsed {len(private_lobbyists.data):,} records\n')
+
+    # only re-download last name search results from `FIRST_YEAR_DOWNLOAD` onward
+    lnames_to_search = set([x.get('lobbyist_name')['name_last'] for x in private_lobbyists.data if int(x['year']) >= FIRST_YEAR_DOWNLOAD])
+
+    finished = get_detail_urls_private(
+        last_names=lnames_to_search
+    )
+
+    # collect the URLs of registration detail pages
+    # for `FIRST_YEAR_DOWNLOAD` onward
+    urls = []
+    
+    for name in finished:
+        urls.extend(
+            [x.get('url') for x in finished[name] if x.get('year') >= FIRST_YEAR_DOWNLOAD]
+        )
+
+    # this function returns a list of URLs for registration pages downloaded this time around
+    # TODO: slack alert for new registration pages
+    new_registration_pages = download_detail_pages(urls=urls)
+
+    # scrape the private lobbyist data
+    scraped = scrape_private_data()
+
+    # TODO: slack alert for new filings
+    # new_filings = scraped.get('new_filings')
+
+    # verify that every record in the PDF is present in
+    # the scraped data
+    vet_results_private(
+        pdf_data=private_lobbyists.data,
+        scraped_data=scraped.get('scraped_data')
+    )
+
     build_readme()
