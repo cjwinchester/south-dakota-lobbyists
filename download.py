@@ -781,8 +781,7 @@ def build_readme():
             zero_filings.append(reg)
             continue
 
-        for filing in reg.get('filings'):
-            filings_count += 1
+        filings_count += len(reg.get('filings'))
 
     registrations_min_date = min(lobbyist_employment_dates)
     registrations_max_date = max(lobbyist_employment_dates)
