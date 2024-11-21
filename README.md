@@ -84,10 +84,10 @@ For the private lobbyists, the final step is to check the scraped data against t
         - `filing_guid`: Unique identifier, taken from the `id` parameter in `filing_url`
 
 #### [`public/south-dakota-lobbyists-public.csv`](public/south-dakota-lobbyists-public.csv)
-    - Record count: 4,960
-    - Date range: 2012 to 2025
-    - Record layout:
-        - `year`
-        - `lobbyist_name`
-        - `agency`
-        - `agency_address`
+- Record count: 4,960
+- Date range: 2012 to 2025
+- Record layout:
+    - `year`
+    - `lobbyist_name`
+    - `agency`
+    - `agency_address`
