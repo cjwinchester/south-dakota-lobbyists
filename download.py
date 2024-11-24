@@ -903,6 +903,12 @@ def vet_results_private(scraped_data=[], pdf_data=[]):
             )
         )
 
+        # handling an error introduced in 11/2024
+        # in which this lobbyist's name was attached
+        # to other people's records
+        if name == 'MARK SNEDEKER':
+            continue
+
         if pdf_years != scraped_years:
             msg = f'Missing registration data for {name}\nScraped from PDF: {pdf_years}\nScraped from website: {scraped_years}'
 
@@ -913,7 +919,7 @@ def vet_results_private(scraped_data=[], pdf_data=[]):
 
 if __name__ == '__main__':
 
-    download_pdfs()
+    # download_pdfs()
 
     print('\nProcessing public lobbyist file ...')
     public_lobbyists = ResultsPDF(
@@ -928,6 +934,8 @@ if __name__ == '__main__':
 
     print(f'- Parsed {len(private_lobbyists.data):,} records\n')
 
+
+    '''
     # only re-download last name search results from `FIRST_YEAR_DOWNLOAD` onward
     lnames_to_search = set([x.get('lobbyist_name')['name_last'] for x in private_lobbyists.data if int(x['year']) >= FIRST_YEAR_DOWNLOAD])
 
@@ -947,6 +955,7 @@ if __name__ == '__main__':
     # this function returns a list of URLs for registration pages downloaded this time around
     # TODO: slack alert for new registration pages
     new_registration_pages = download_detail_pages(urls=urls)
+    '''
 
     # scrape the private lobbyist data
     scraped = scrape_private_data()
