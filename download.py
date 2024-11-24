@@ -6,6 +6,7 @@ import json
 import itertools
 import random
 from urllib.parse import urljoin, urlparse, parse_qs
+from email import utils
 
 from playwright.sync_api import sync_playwright
 import pdfplumber
@@ -92,14 +93,23 @@ name_key_map = {
     'Surname': 'name_last'
 }
 
-# for probablepeople lookups
-name_fixes = {
-    'REBECCA CHRISTIANSEN, LPC-MH,': 'REBECCA CHRISTIANSEN, LPC-MH, LPC, NCC',
-    'CHRISTOPHER HEMINGWAY-': 'CHRISTOPHER HEMINGWAY-TURNER',
-    'MARY C. MICHELLE': 'MARY C. MICHELLE LOUNSBERY',
-    'DARRELL D. REVOKED -': 'DARRELL D. REVOKED - RASCHKE',
-    'ROB MONSON': 'ROB L MONSON'
-}
+# read in some data error fixes
+with open('fixes.json', 'r') as infile:
+    fixes = json.load(infile)
+
+# name fixes for probablepeople lookups
+name_fixes = fixes.get('name_fixes')
+
+# various registration date errors to fix
+date_fixes = fixes.get('date_fixes')
+
+# public lobbyists mistakenly included in private
+# lobbyist data but missing from public data --
+# we'll skip them when parsing the private data and
+# add them to the public data
+public_but_private = fixes.get('public_but_private')
+
+FILEPATH_RSS = Path('south-dakota-lobbyists.xml')
 
 
 class ResultsPDF:
@@ -241,6 +251,11 @@ class ResultsPDF:
                     d[key] = section_text
 
                 self.data.append(d)
+
+        # add public records mistakenly categorized as private
+        self.data.extend(
+            list(public_but_private.values())
+        )
 
         self.data.sort(
             key=lambda x: (x['agency'], x['year'])
@@ -548,6 +563,10 @@ def scrape_registration_page(html_filepath):
     soup = BeautifulSoup(html, 'html.parser')
     registration_guid = html_filepath.stem
 
+    # skip if actually a public lobbyist
+    if registration_guid in public_but_private.keys():
+        return {}
+
     d = {
         'url': f'https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN={registration_guid}',
         'registration_guid': registration_guid
@@ -650,6 +669,13 @@ def scrape_registration_page(html_filepath):
             'address_full': d['employer_address']
         }
 
+    # apply date fixes, if any
+    if date_fixes.get(d['registration_guid']):
+        d = {
+            **d,
+            **date_fixes.get(d['registration_guid'])
+        }
+
     table = soup.find('table')
     rows = table.find_all('tr')[1:]
 
@@ -727,12 +753,34 @@ def scrape_private_data():
 
         scraped_data = scrape_registration_page(html_file)
 
+        # skip if this is actually a public lobbyist record
+        if not scraped_data:
+            continue
+
+        lobbyist_name = scraped_data.get('lobbyist_name').get('name_full')
+        employer_name = scraped_data.get('employer_name')
+
         for filing in scraped_data.get('filings'):
             if filing.get('new'):
-                new_filings.append(filing)
+                new_filings.append({
+                    **filing,
+                    **{
+                        'lobbyist_name': lobbyist_name,
+                        'employer_name': employer_name
+                    }
+                })
                 del filing['new']
 
         data_out.append(scraped_data)
+
+    # sort by `employer_registration_date`, the most consistent date for a registration record
+    data_out.sort(
+        key=lambda x: (
+            x['year'],
+            x['employer_registration_date']
+        ),
+        reverse=True
+    )
 
     fpath = config['private']['filepath_data'].resolve()
 
@@ -763,16 +811,16 @@ def build_readme():
 
     zero_filings = []
     filings_count = 0
-    lobbyist_employment_dates = []
+    employer_registration_dates = []
 
     for reg in data_private:
 
         empl_date = datetime.fromisoformat(
-            reg['lobbyist_employment_date']
+            reg['employer_registration_date']
         ).date()
 
         if empl_date.year > 2011 and empl_date.year <= THIS_YEAR:
-            lobbyist_employment_dates.append(empl_date)
+            employer_registration_dates.append(empl_date)
 
         reg_no = reg.get('registration_number')
         filings = reg.get('filings')
@@ -783,8 +831,8 @@ def build_readme():
 
         filings_count += len(reg.get('filings'))
 
-    registrations_min_date = min(lobbyist_employment_dates)
-    registrations_max_date = max(lobbyist_employment_dates)
+    registrations_min_date = min(employer_registration_dates)
+    registrations_max_date = max(employer_registration_dates)
 
     date_range_private = f'{registrations_min_date.isoformat()} to {registrations_max_date.isoformat()}'
 
@@ -861,7 +909,7 @@ def download_detail_pages(urls=[]):
 
         print(f'- Wrote {detail_page_filepath}')
 
-        new_downloads.append(url)
+        new_downloads.append(registration_id)
 
     return new_downloads
 
@@ -892,6 +940,18 @@ def vet_results_private(scraped_data=[], pdf_data=[]):
 
     # make sure all the registration records are present
     for name in lookup_pdf:
+        skip_names = [
+            # variously listed as public lobbyists
+            'ANN BOLMAN',
+            'TIFFANY SANDERSON',
+
+            # error introduced in 11/24 -- his name is attached to other lobbyists' records
+            'MARK SNEDEKER'
+        ]
+
+        if name in skip_names:
+            continue
+
         pdf_years = ', '.join(
             sorted(
                 [str(x) for x in lookup_pdf[name]]
@@ -903,12 +963,6 @@ def vet_results_private(scraped_data=[], pdf_data=[]):
             )
         )
 
-        # handling an error introduced in 11/2024
-        # in which this lobbyist's name was attached
-        # to other people's records
-        if name == 'MARK SNEDEKER':
-            continue
-
         if pdf_years != scraped_years:
             msg = f'Missing registration data for {name}\nScraped from PDF: {pdf_years}\nScraped from website: {scraped_years}'
 
@@ -917,9 +971,44 @@ def vet_results_private(scraped_data=[], pdf_data=[]):
     return True
 
 
+def build_rss(items=[]):
+    if not items:
+        return
+
+    with open('rss.template', 'r') as infile:
+        tmpl = infile.read()
+
+    build_date = utils.format_datetime(NOW)
+    item_str = ''
+
+    for item in items:
+        item_str += f'''
+    <item>
+      <title>{item.get('title')}</title>
+      <link>{item.get('link')}</link>
+      <description>{item.get('description')}</description>
+      <pubDate>{item.get('pub_date')}</pubDate>
+      <guid isPermaLink="false">{item.get('guid')}</guid>
+    </item>
+        '''
+
+    rpl = (
+        ('{% BUILD_DATE %}', build_date),
+        ('{% ITEMS %}', item_str)
+    )
+
+    for pair in rpl:
+        tmpl = tmpl.replace(*pair)
+
+    with open(FILEPATH_RSS, 'w') as outfile:
+        outfile.write(tmpl)
+
+    print(f'- Wrote {FILEPATH_RSS}')
+
+
 if __name__ == '__main__':
 
-    # download_pdfs()
+    download_pdfs()
 
     print('\nProcessing public lobbyist file ...')
     public_lobbyists = ResultsPDF(
@@ -934,13 +1023,11 @@ if __name__ == '__main__':
 
     print(f'- Parsed {len(private_lobbyists.data):,} records\n')
 
-
-    '''
     # only re-download last name search results from `FIRST_YEAR_DOWNLOAD` onward
     lnames_to_search = set([x.get('lobbyist_name')['name_last'] for x in private_lobbyists.data if int(x['year']) >= FIRST_YEAR_DOWNLOAD])
 
     finished = get_detail_urls_private(
-        last_names=lnames_to_search
+        last_names=sorted(lnames_to_search)
     )
 
     # collect the URLs of registration detail pages
@@ -952,16 +1039,11 @@ if __name__ == '__main__':
             [x.get('url') for x in finished[name] if x.get('year') >= FIRST_YEAR_DOWNLOAD]
         )
 
-    # this function returns a list of URLs for registration pages downloaded this time around
-    # TODO: slack alert for new registration pages
+    # this function returns a list of guids for registration pages downloaded this time around
     new_registration_pages = download_detail_pages(urls=urls)
-    '''
 
     # scrape the private lobbyist data
     scraped = scrape_private_data()
-
-    # TODO: slack alert for new filings
-    # new_filings = scraped.get('new_filings')
 
     # verify that every record in the PDF is present in
     # the scraped data
@@ -970,4 +1052,35 @@ if __name__ == '__main__':
         scraped_data=scraped.get('scraped_data')
     )
 
+    # rebuild RSS feed if there's anything new
+    rss_items = []
+
+    new_registrations = [x for x in scraped.get('scraped_data') if x.get('registration_guid') in new_registration_pages]
+
+    for rec in new_registrations:
+        rss_items.append({
+            'title': f'Lobbyist registration: {rec.get("lobbyist_name").get("name_full").replace('&', '&#x26;')} for {rec.get("employer_name").replace('&', '&#x26;')}',
+            'link': rec.get('url'),
+            'description': rec.get('employer_lobbying_subjects').replace('&', '&#x26;'),
+            'pub_date': utils.format_datetime(
+                datetime.fromisoformat(
+                    rec.get('employer_registration_date')
+                )
+            ),
+            'guid': rec.get('registration_guid')
+        })
+
+    for filing in scraped.get('new_filings'):
+        rss_items.append({
+            'title': f'Lobbyist filing {filing.get("filing_number")}: {filing.get("filing_type")} filed by {filing.get("lobbyist_name").replace('&', '&#x26;')} for {filing.get("employer_name").replace('&', '&#x26;')}',
+            'link': filing.get('filing_url'),
+            'pub_date': utils.format_datetime(
+                datetime.fromisoformat(
+                    filing.get('filing_date')
+                )
+            ),
+            'guid': filing.get('filing_guid')
+        })
+
+    build_rss(items=rss_items)
     build_readme()

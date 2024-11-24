@@ -1,0 +1,34 @@
+{
+    "public_but_private": {
+        "023168076009114249021252010157073255116033066192": {
+            "year": "2024",
+            "lobbyist_name": "TIFFANY SANDERSON",
+            "agency": "LAKE AREA TECHNICAL COLLEGE",
+            "agency_address": "1201 ARROW AVE PO BOX 730 WATERTOWN, SD 57201"
+        },
+        "075107127042222196040132024199230076167028236219": {
+            "year": "2024",
+            "lobbyist_name": "ANN BOLMAN",
+            "agency": "WESTERN DAKOTA TECHNICAL COLLEGE",
+            "agency_address": "800 MICKELSON DR. RAPID CITY, SD 57703"
+        }
+    },
+    "name_fixes": {
+        "REBECCA CHRISTIANSEN, LPC-MH,": "REBECCA CHRISTIANSEN, LPC-MH, LPC, NCC",
+        "CHRISTOPHER HEMINGWAY-": "CHRISTOPHER HEMINGWAY-TURNER",
+        "MARY C. MICHELLE": "MARY C. MICHELLE LOUNSBERY",
+        "DARRELL D. REVOKED -": "DARRELL D. REVOKED - RASCHKE",
+        "ROB MONSON": "ROB L MONSON"
+    },
+    "date_fixes": {
+        "235010251119037125098253179099079155010243079118": {
+            "lobbyist_employment_date": "2015-04-13"
+        },
+        "253020026218211199083085079151099144074091241104": {
+            "employer_authorization_date": "2015-02-18"
+        },
+        "205172141183121147170207005254080105014191238205": {
+            "employer_authorization_date": "2015-01-06"
+        }
+    }
+}

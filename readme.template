@@ -6,7 +6,7 @@ tl;dr: Building a more complete dataset of public and private lobbyists in South
 
 - [The problem](#The-problem)
 - [The solution](#The-solution)
-- [Results](#Results)
+- [The results](#The-results)
 
 ---
 
@@ -35,7 +35,7 @@ That's the workflow I settled on, using:
 
 For the private lobbyists, the final step is to check the scraped data against the data extracted from the PDF to make sure nothing is missing.
 
-### Results
+### The results
 
 #### [`private/south-dakota-lobbyists-private.json`](private/south-dakota-lobbyists-private.json)
 - Each record is a _lobbyist registration_ for one legislative session, meaning the same lobbyist could appear more than once if they lobbied for multiple legislative sessions

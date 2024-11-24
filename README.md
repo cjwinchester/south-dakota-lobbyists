@@ -6,7 +6,7 @@ tl;dr: Building a more complete dataset of public and private lobbyists in South
 
 - [The problem](#The-problem)
 - [The solution](#The-solution)
-- [Results](#Results)
+- [The results](#The-results)
 
 ---
 
@@ -35,12 +35,12 @@ That's the workflow I settled on, using:
 
 For the private lobbyists, the final step is to check the scraped data against the data extracted from the PDF to make sure nothing is missing.
 
-### Results
+### The results
 
 #### [`private/south-dakota-lobbyists-private.json`](private/south-dakota-lobbyists-private.json)
 - Each record is a _lobbyist registration_ for one legislative session, meaning the same lobbyist could appear more than once if they lobbied for multiple legislative sessions
-- Record count: **8,570** registration records, including 803 that don't reference any financial disclosure forms. The rest of them collectively point to 17,678 disclosure forms
-- Date range: 2012-01-01 to 2024-11-22
+- Record count: **8,568** registration records, including 801 that don't reference any financial disclosure forms. The rest of them collectively point to 17,678 disclosure forms
+- Date range: 2012-01-03 to 2024-11-22
 - Record layout:
     - `url`: Lobbyist registration detail page URL
     - `year`: Registration year
@@ -84,7 +84,7 @@ For the private lobbyists, the final step is to check the scraped data against t
         - `filing_guid`: Unique identifier, taken from the `id` parameter in `filing_url`
 
 #### [`public/south-dakota-lobbyists-public.csv`](public/south-dakota-lobbyists-public.csv)
-- Record count: 4,959
+- Record count: 4,961
 - Date range: 2012 to 2025
 - Record layout:
     - `year`

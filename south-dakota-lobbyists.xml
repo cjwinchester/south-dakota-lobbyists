@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+  <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>South Dakota lobbyists</title>
+    <link>https://github.comcjwinchester/south-dakota-lobbyists</link>
+    <description>An RSS feed that flags new registrations and financial disclosures of private lobbyists in South Dakota.</description>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 24 Nov 2024 09:50:06 -0000</lastBuildDate>
+    <atom:link href="https://raw.githubusercontent.com/cjwinchester/south-dakota-lobbyists/refs/heads/main/south-dakota-lobbyists.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Lobbyist registration: SAMUEL J NELSON for GOOGLE LLC AND ITS AFFILIATES</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=238062228183096064137106115086178176218237126117</link>
+      <description>INTERNET AND ELECTRONIC SERVICES</description>
+      <pubDate>Fri, 22 Nov 2024 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">238062228183096064137106115086178176218237126117</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist registration: RICHARD TIESZEN for WM</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=235016079011245152137153197134129055154079126217</link>
+      <description>RECYCLING AND WASTE MANAGEMENT</description>
+      <pubDate>Wed, 20 Nov 2024 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">235016079011245152137153197134129055154079126217</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist registration: STEVE WILLARD for NORTH DAKOTA PETROLEUM COUNCIL</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=078191067236109175084107167015102231118214130142</link>
+      <description>REGULATIONS AND TRANSPORTATION ISSUES OF PETROLEUM PRODUCTS</description>
+      <pubDate>Wed, 13 Nov 2024 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">078191067236109175084107167015102231118214130142</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist registration: STEVE WILLARD for SOUTH DAKOTA BROADCASTERS ASSOCIATION</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=103239034154154185188094239135002019019072173033</link>
+      <description>BROADCAST INDUSTRY REGULATIONS AND RELATED BUSINESS MATTERS</description>
+      <pubDate>Wed, 13 Nov 2024 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">103239034154154185188094239135002019019072173033</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist registration: LAURIE A SHELTON for GREATER HURON DEVELOPMENT CORPORATION</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=235010251119037125098253179099079155010243079118</link>
+      <description>WORKFORCE, LABOR LAWS, TOURISM, HUNTING, LEGISLATION THAT AFFECTS OUR MEMBERS, VISITORS, REGION &#x26; COMMUNITY</description>
+      <pubDate>Fri, 31 Jan 2020 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">235010251119037125098253179099079155010243079118</guid>
+    </item>
+        
+  </channel>
+  </rss>
