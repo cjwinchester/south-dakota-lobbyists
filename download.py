@@ -990,7 +990,7 @@ def build_rss(items=[]):
       <link>{item.get('link')}</link>
       <description>{item.get('description')}</description>
       <pubDate>{item.get('pub_date')}</pubDate>
-      <guid isPermaLink="false">{item.get('guid')}</guid>
+      <guid isPermaLink="false">{build_date}</guid>
     </item>
         '''
 
