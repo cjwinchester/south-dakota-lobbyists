@@ -447,6 +447,8 @@ def get_detail_urls_private(last_names=[]):
         the search page and scrape the data into an intermediate file in `last_names`
     '''
 
+    random.shuffle(last_names)
+
     dir_last_names = config['private']['dir_last_names']
     plural = 'name' if len(last_names) == 1 else 'names'
 
