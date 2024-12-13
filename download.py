@@ -948,7 +948,8 @@ def vet_results_private(scraped_data=[], pdf_data=[]):
             'TIFFANY SANDERSON',
 
             # error introduced in 11/24 -- his name is attached to other lobbyists' records
-            'MARK SNEDEKER'
+            'MARK SNEDEKER',
+            'KAYLA FRANK'
         ]
 
         if name in skip_names:
@@ -1047,13 +1048,6 @@ if __name__ == '__main__':
     # scrape the private lobbyist data
     scraped = scrape_private_data()
 
-    # verify that every record in the PDF is present in
-    # the scraped data
-    vet_results_private(
-        pdf_data=private_lobbyists.data,
-        scraped_data=scraped.get('scraped_data')
-    )
-
     # rebuild RSS feed if there's anything new
     rss_items = []
 
@@ -1086,3 +1080,10 @@ if __name__ == '__main__':
 
     build_rss(items=rss_items)
     build_readme()
+
+    # verify that every record in the PDF is present in
+    # the scraped data
+    vet_results_private(
+        pdf_data=private_lobbyists.data,
+        scraped_data=scraped.get('scraped_data')
+    )
