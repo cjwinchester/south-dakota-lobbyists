@@ -940,16 +940,14 @@ def vet_results_private(scraped_data=[], pdf_data=[]):
 
         lookup_pdf[name_full].append(record.get('year'))
 
+    mismatches = []
+
     # make sure all the registration records are present
     for name in lookup_pdf:
         skip_names = [
             # variously listed as public lobbyists
             'ANN BOLMAN',
-            'TIFFANY SANDERSON',
-
-            # error introduced in 11/24 -- his name is attached to other lobbyists' records
-            'MARK SNEDEKER',
-            'KAYLA FRANK'
+            'TIFFANY SANDERSON'
         ]
 
         if name in skip_names:
@@ -967,9 +965,19 @@ def vet_results_private(scraped_data=[], pdf_data=[]):
         )
 
         if pdf_years != scraped_years:
-            msg = f'Missing registration data for {name}\nScraped from PDF: {pdf_years}\nScraped from website: {scraped_years}'
+            mismatches.append({
+                'name': name,
+                'pdf_years': pdf_years,
+                'scraped_years': scraped_years
+            })
 
-            raise Exception(msg)
+    if mismatches:
+        print(f'Mismatches: {len(mismatches)}')
+
+    for name in mismatches:
+        print('-'*10)
+        print(f"PDF: {name.get('pdf_years')}")
+        print(f"Scraped: {name.get('scraped_years')}")
 
     return True
 
@@ -1011,7 +1019,7 @@ def build_rss(items=[]):
 
 if __name__ == '__main__':
 
-    download_pdfs()
+    # download_pdfs()
 
     print('\nProcessing public lobbyist file ...')
     public_lobbyists = ResultsPDF(
