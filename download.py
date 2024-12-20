@@ -976,6 +976,7 @@ def vet_results_private(scraped_data=[], pdf_data=[]):
 
     for name in mismatches:
         print('-'*10)
+        print(f"{name.get('name')}")
         print(f"PDF: {name.get('pdf_years')}")
         print(f"Scraped: {name.get('scraped_years')}")
 
@@ -1019,7 +1020,7 @@ def build_rss(items=[]):
 
 if __name__ == '__main__':
 
-    # download_pdfs()
+    download_pdfs()
 
     print('\nProcessing public lobbyist file ...')
     public_lobbyists = ResultsPDF(
