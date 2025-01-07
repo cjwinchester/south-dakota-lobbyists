@@ -1,6 +1,6 @@
 # South Dakota lobbyist data
 
-_Updated January 05, 2025_
+_Updated January 06, 2025_
 
 tl;dr: Building a more complete dataset of public and private lobbyists in South Dakota.
 
@@ -39,8 +39,8 @@ For the private lobbyists, the final step is to check the scraped data against t
 
 #### [`private/south-dakota-lobbyists-private.json`](private/south-dakota-lobbyists-private.json)
 - Each record is a _lobbyist registration_ for one legislative session, meaning the same lobbyist could appear more than once if they lobbied for multiple legislative sessions
-- Record count: **8,830** registration records, including 1,063 that don't reference any financial disclosure forms. The rest of them collectively point to 17,678 disclosure forms
-- Date range: 2012-01-03 to 2025-01-04
+- Record count: **8,849** registration records, including 1,082 that don't reference any financial disclosure forms. The rest of them collectively point to 17,678 disclosure forms
+- Date range: 2012-01-03 to 2025-01-06
 - Record layout:
     - `url`: Lobbyist registration detail page URL
     - `year`: Registration year
@@ -84,7 +84,7 @@ For the private lobbyists, the final step is to check the scraped data against t
         - `filing_guid`: Unique identifier, taken from the `id` parameter in `filing_url`
 
 #### [`public/south-dakota-lobbyists-public.csv`](public/south-dakota-lobbyists-public.csv)
-- Record count: 5,060
+- Record count: 5,063
 - Date range: 2012 to 2025
 - Record layout:
     - `year`
