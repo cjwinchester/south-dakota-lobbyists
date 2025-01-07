@@ -2,7 +2,6 @@
 private/disclosure-forms/*.pdf
 private/last-names/*.json
 
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

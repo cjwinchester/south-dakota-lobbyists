@@ -6,12 +6,14 @@ import json
 import itertools
 import random
 from urllib.parse import urljoin, urlparse, parse_qs
+from urllib3.util import Retry
 from email import utils
 
+from requests import Session
+from requests.adapters import HTTPAdapter
 from playwright.sync_api import sync_playwright
 import pdfplumber
 import probablepeople as pp
-import requests
 from bs4 import BeautifulSoup
 from scourgify import normalize_address_record
 from scourgify.exceptions import (
@@ -20,7 +22,10 @@ from scourgify.exceptions import (
 )
 
 
-SEARCH_URL = 'https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistSearch.aspx'
+
+BASE_URL = 'https://sosenterprise.sd.gov/BusinessServices/Lobbyist'
+SEARCH_URL = f'{BASE_URL}/LobbyistSearch.aspx'
+REGISTRATION_URL = f'{BASE_URL}/LobbyistRegistrationDetail.aspx'
 
 SELECTOR_BUTTON_SEARCH = '#ctl00_MainContent_SearchButton'
 SELECTOR_BUTTON_PRINT = '#ctl00_MainContent_PrintButton'
@@ -723,7 +728,16 @@ def scrape_registration_page(html_filepath):
             filepath_filing = config['private']['dir_forms'] / f'{doc_id}.pdf'
 
             if not filepath_filing.exists():
-                with requests.get(
+                s = Session()
+
+                retries = Retry(
+                    total=5,
+                    backoff_factor=0.2
+                )
+
+                s.mount('https://', HTTPAdapter(max_retries=retries))
+
+                with s.get(
                     document_url,
                     headers=REQ_HEADERS,
                     stream=True
@@ -845,7 +859,7 @@ def build_readme():
     date_range_public = f'{min(years)} to {max(years)}'
 
     to_replace = (
-        ('{% UPDATED %}', NOW.strftime('%B %d, %Y')),
+        ('{% UPDATED %}', NOW.strftime('%B %-d, %Y')),
         ('{% COUNT_PRIVATE_REGISTRATIONS %}', f'{len(data_private):,}'),
         ('{% COUNT_PRIVATE_REGISTRATION_NO_FILINGS %}', f'{len(zero_filings):,}'),
         ('{% COUNT_PRIVATE_FILINGS %}', f'{filings_count:,}'),
@@ -865,12 +879,12 @@ def build_readme():
     return file_out
 
 
-def download_detail_pages(urls=[]):
+def download_detail_pages(urls=[], overwrite=False):
     ''' given a list of URLs for registration
         detail pages, download each page that
-        hasn't already been downloaded
+        hasn't already been downloaded, unless overwrite=True
 
-        return a list of newly downloaded registrations
+        return a list of downloaded registration URLs
     '''
 
     '''
@@ -887,31 +901,50 @@ def download_detail_pages(urls=[]):
     '''
 
     new_downloads = []
+    urls = list(set(urls))
 
-    for url in set(urls):
-        parsed_url = urlparse(url)
-        registration_id = parse_qs(parsed_url.query)['CN'][0]
+    def fetch_pages():
+        pages = [x for x in urls if x not in new_downloads]
 
-        detail_page_filepath = (config['private']['dir_pages'] / f'{registration_id}.html').resolve()
+        for url in pages:
+            parsed_url = urlparse(url)
+            registration_id = parse_qs(parsed_url.query)['CN'][0]
 
-        if detail_page_filepath.exists():
-            continue
+            detail_page_filepath = (config['private']['dir_pages'] / f'{registration_id}.html').resolve()
 
-        req = requests.get(
-            url,
-            headers=REQ_HEADERS
-        )
+            if detail_page_filepath.exists() and not overwrite:
+                continue
 
-        req.raise_for_status()
+            try:
+                s = Session()
 
-        time.sleep(random.uniform(1, 3))
+                retries = Retry(
+                    total=5,
+                    backoff_factor=0.5
+                )
 
-        with open(detail_page_filepath, 'w') as outfile:
-            outfile.write(req.text)
+                s.mount('https://', HTTPAdapter(max_retries=retries))
 
-        print(f'- Wrote {detail_page_filepath}')
+                req = s.get(
+                    url,
+                    headers=REQ_HEADERS
+                )
 
-        new_downloads.append(registration_id)
+                req.raise_for_status()
+                time.sleep(random.uniform(1, 3))
+
+                with open(detail_page_filepath, 'w') as outfile:
+                    outfile.write(req.text)
+
+                print(f'- Wrote {detail_page_filepath}')
+
+                new_downloads.append(url)
+            except:
+                print('\n😅 Ope! Rebooting ...\n')
+                time.sleep(10)
+                fetch_pages()
+
+    fetch_pages()
 
     return new_downloads
 
@@ -1018,7 +1051,47 @@ def build_rss(items=[]):
     print(f'- Wrote {FILEPATH_RSS}')
 
 
+def refresh_detail_pages():
+
+    html_filepaths = [x for x in config['private']['dir_pages'].glob('*.html')]
+
+    urls = [f'{REGISTRATION_URL}?CN={x.stem}' for x in html_filepaths]
+
+    new_registration_pages = download_detail_pages(
+        urls=urls,
+        overwrite=True
+    )
+
+    scraped = scrape_private_data()
+
+    # rebuild RSS feed if there's anything new
+    rss_items = []
+
+    for filing in scraped.get('new_filings'):
+        rss_items.append({
+            'title': f'Lobbyist filing {filing.get("filing_number")}: {filing.get("filing_type")} filed by {filing.get("lobbyist_name").replace('&', '&#x26;')} for {filing.get("employer_name").replace('&', '&#x26;')}',
+            'link': filing.get('filing_url'),
+            'pub_date': utils.format_datetime(
+                datetime.fromisoformat(
+                    filing.get('filing_date')
+                )
+            ),
+            'guid': filing.get('filing_guid')
+        })
+
+    build_rss(items=rss_items)
+    build_readme()
+
+    return scraped
+
+
 if __name__ == '__main__':
+
+    # refresh_detail_pages()
+
+    scrape_private_data()
+
+    '''
 
     download_pdfs()
 
@@ -1064,7 +1137,7 @@ if __name__ == '__main__':
 
     for rec in new_registrations:
         rss_items.append({
-            'title': f'Lobbyist registration: {rec.get("lobbyist_name").get("name_full").replace('&', '&#x26;')} for {rec.get("employer_name").replace('&', '&#x26;')}',
+            'title': f'Lobbyist registration: {rec.get("lobbyist_name").get("name_full").replace('&', '&#x26;')} ({rec.get("lobbyist_status")}) for {rec.get("employer_name").replace('&', '&#x26;')} ({rec.get("employer_registration_status")})',
             'link': rec.get('url'),
             'description': rec.get('employer_lobbying_subjects').replace('&', '&#x26;'),
             'pub_date': utils.format_datetime(
@@ -1096,3 +1169,5 @@ if __name__ == '__main__':
         pdf_data=private_lobbyists.data,
         scraped_data=scraped.get('scraped_data')
     )
+
+    '''
