@@ -45,6 +45,9 @@ THIS_YEAR = NOW.year
 # will be redownloaded to check for new info
 FIRST_YEAR_DOWNLOAD = THIS_YEAR
 
+if NOW.month < 6:
+    FIRST_YEAR_DOWNLOAD = THIS_YEAR - 1
+
 config = {
     'private': {
         'pdf_vertical_lines': {
@@ -1089,10 +1092,6 @@ if __name__ == '__main__':
 
     # refresh_detail_pages()
 
-    scrape_private_data()
-
-    '''
-
     download_pdfs()
 
     print('\nProcessing public lobbyist file ...')
@@ -1169,5 +1168,3 @@ if __name__ == '__main__':
         pdf_data=private_lobbyists.data,
         scraped_data=scraped.get('scraped_data')
     )
-
-    '''
