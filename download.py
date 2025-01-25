@@ -43,7 +43,7 @@ THIS_YEAR = NOW.year
 
 # registration records >= this year
 # will be redownloaded to check for new info
-FIRST_YEAR_DOWNLOAD = THIS_YEAR
+FIRST_YEAR_DOWNLOAD = THIS_YEAR - 1
 
 if NOW.month < 6:
     FIRST_YEAR_DOWNLOAD = THIS_YEAR - 1
@@ -983,7 +983,10 @@ def vet_results_private(scraped_data=[], pdf_data=[]):
         skip_names = [
             # variously listed as public lobbyists
             'ANN BOLMAN',
-            'TIFFANY SANDERSON'
+            'TIFFANY SANDERSON',
+
+            # throws a problem sometimes
+            'ROB L MONSON'
         ]
 
         if name in skip_names:
@@ -1108,10 +1111,14 @@ if __name__ == '__main__':
     print(f'- Parsed {len(private_lobbyists.data):,} records\n')
 
     # only re-download last name search results from `FIRST_YEAR_DOWNLOAD` onward
-    lnames_to_search = set([x.get('lobbyist_name')['name_last'] for x in private_lobbyists.data if int(x['year']) >= FIRST_YEAR_DOWNLOAD])
+    lnames_to_search = list(
+        set(
+            [x.get('lobbyist_name')['name_last'] for x in private_lobbyists.data if int(x['year']) >= FIRST_YEAR_DOWNLOAD]
+        )
+    )
 
     finished = get_detail_urls_private(
-        last_names=sorted(lnames_to_search)
+        last_names=lnames_to_search
     )
 
     # collect the URLs of registration detail pages
@@ -1123,8 +1130,9 @@ if __name__ == '__main__':
             [x.get('url') for x in finished[name] if x.get('year') >= FIRST_YEAR_DOWNLOAD]
         )
 
-    # this function returns a list of guids for registration pages downloaded this time around
+    # this function returns a list of URLs for registration pages downloaded this time around
     new_registration_pages = download_detail_pages(urls=urls)
+    new_registration_guids = [parse_qs(urlparse(x).query)['CN'][0] for x in new_registration_pages]
 
     # scrape the private lobbyist data
     scraped = scrape_private_data()
@@ -1132,7 +1140,7 @@ if __name__ == '__main__':
     # rebuild RSS feed if there's anything new
     rss_items = []
 
-    new_registrations = [x for x in scraped.get('scraped_data') if x.get('registration_guid') in new_registration_pages]
+    new_registrations = [x for x in scraped.get('scraped_data') if x.get('registration_guid') in new_registration_guids]
 
     for rec in new_registrations:
         rss_items.append({
