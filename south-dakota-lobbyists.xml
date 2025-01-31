@@ -5,175 +5,23 @@
     <link>https://github.comcjwinchester/south-dakota-lobbyists</link>
     <description>An RSS feed that flags new registrations and financial disclosures of private lobbyists in South Dakota.</description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 25 Jan 2025 08:53:36 -0000</lastBuildDate>
+    <lastBuildDate>Fri, 31 Jan 2025 09:36:29 -0000</lastBuildDate>
     <atom:link href="https://raw.githubusercontent.com/cjwinchester/south-dakota-lobbyists/refs/heads/main/south-dakota-lobbyists.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Lobbyist registration: SCOTT WILL (ACTIVE) for PHARMACEUTICAL RESEARCH AND MANUFACTURERS OF AMERICA (ACTIVE)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=241113062214059254077247157013250239000189213207</link>
-      <description>ALL MATTERS AFFECTING THE PHARMACEUTICAL INDUSTRY.</description>
-      <pubDate>Fri, 24 Jan 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">241113062214059254077247157013250239000189213207</guid>
+      <title>Lobbyist registration: LYLE PERMAN (ACTIVE) for SOUTH DAKOTA AGRICULTURAL LAND TRUST (PENDING AUTHORIZATION)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=185138202124053251112153052145225030028062099008</link>
+      <description>AGRICULTURE, CONSERVATION</description>
+      <pubDate>Thu, 30 Jan 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">185138202124053251112153052145225030028062099008</guid>
     </item>
         
     <item>
-      <title>Lobbyist registration: T.J. NELSON (ACTIVE) for SOUTH DAKOTA UPLAND OUTFITTERS ASSOCIATION (PENDING AUTHORIZATION)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=132249048094171090078029076224167122243210105077</link>
-      <description>ALL SUBJECTS OF INTEREST TO THE ASSOCIATION</description>
-      <pubDate>Fri, 24 Jan 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">132249048094171090078029076224167122243210105077</guid>
-    </item>
-        
-    <item>
-      <title>Lobbyist registration: ERIC GROCOTT (ACTIVE) for SOUTH DAKOTA PHARMACISTS ASSOCIATION (ACTIVE)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=106189200093249109148043131220067200155099076175</link>
-      <description>PHARMACY</description>
-      <pubDate>Fri, 24 Jan 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">106189200093249109148043131220067200155099076175</guid>
-    </item>
-        
-    <item>
-      <title>Lobbyist registration: GRACE BECK (ACTIVE) for SOUTH DAKOTA UPLAND OUTFITTERS ASSOCIATION (PENDING AUTHORIZATION)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=008068063091103077100158099092015090046189047033</link>
-      <description>ALL SUBJECTS OF INTEREST TO THE ASSOCIATION</description>
-      <pubDate>Fri, 24 Jan 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">008068063091103077100158099092015090046189047033</guid>
-    </item>
-        
-    <item>
-      <title>Lobbyist registration: MADISON STRAND (ACTIVE) for SOUTH DAKOTA UPLAND OUTFITTERS ASSOCIATION (PENDING AUTHORIZATION)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=145184189027051077096072043181203074218031135188</link>
-      <description>ALL SUBJECTS OF INTEREST TO THE ASSOCIATION</description>
-      <pubDate>Fri, 24 Jan 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">145184189027051077096072043181203074218031135188</guid>
-    </item>
-        
-    <item>
-      <title>Lobbyist registration: MATTHEW MCCAULLEY (ACTIVE) for SOUTH DAKOTA UPLAND OUTFITTERS ASSOCIATION (PENDING AUTHORIZATION)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=038189013186231190129197078170120140010219009019</link>
-      <description>ALL SUBJECTS OF INTEREST TO THE ASSOCIATION</description>
-      <pubDate>Fri, 24 Jan 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">038189013186231190129197078170120140010219009019</guid>
-    </item>
-        
-    <item>
-      <title>Lobbyist registration: JASPER DIEGEL (ACTIVE) for META PLATFORMS (ACTIVE)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=034255043237012115003060242007178103136210100181</link>
-      <description>SOCIAL MEDIA, TECHNOLOGY, TAXES AND OTHERS AS NECESSARY</description>
-      <pubDate>Thu, 23 Jan 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">034255043237012115003060242007178103136210100181</guid>
-    </item>
-        
-    <item>
-      <title>Lobbyist registration: JUSTIN BELL (ACTIVE) for INDEPENDENT DAKOTA EDUCATORS ALLIANCE (PENDING AUTHORIZATION)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=172104040135054190127237240217038161210088186127</link>
-      <description>EDUCATIONAL CHOICE</description>
-      <pubDate>Thu, 23 Jan 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">172104040135054190127237240217038161210088186127</guid>
-    </item>
-        
-    <item>
-      <title>Lobbyist registration: RACHEL FUSSELL (ACTIVE) for PEOPLEFORBIKES COALITION (PENDING AUTHORIZATION)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=235016060215218156125083178206143249210214222163</link>
-      <description>PERMIT THE OPERATION OF A CLASS I ELECTRIC BICYCLE ON THE MICKELSON TRAIL</description>
-      <pubDate>Thu, 23 Jan 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">235016060215218156125083178206143249210214222163</guid>
-    </item>
-        
-    <item>
-      <title>Lobbyist registration: KENT PETERSON (ACTIVE) for SANFORD HEALTH (ACTIVE)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=060066211135037228029006148090255028124110241192</link>
-      <description>HEALTHCARE</description>
-      <pubDate>Thu, 23 Jan 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">060066211135037228029006148090255028124110241192</guid>
-    </item>
-        
-    <item>
-      <title>Lobbyist registration: KATIE SIEVERDING (ACTIVE) for META PLATFORMS (ACTIVE)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=201222013142190213235090077096217055170120011034</link>
-      <description>SOCIAL MEDIA, TECHNOLOGY, TAXES AND OTHERS AS NECESSARY</description>
-      <pubDate>Thu, 23 Jan 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">201222013142190213235090077096217055170120011034</guid>
-    </item>
-        
-    <item>
-      <title>Lobbyist registration: KWINN NEFF (ACTIVE) for SD MINERAL INDUSTRIES ASSOCIATION (PENDING AUTHORIZATION)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=138164061167096144057123126036011183254249087073</link>
-      <description>MINERAL INDUSTRIES</description>
-      <pubDate>Thu, 23 Jan 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">138164061167096144057123126036011183254249087073</guid>
-    </item>
-        
-    <item>
-      <title>Lobbyist registration: ELLIE J. BAILEY (ACTIVE) for SOUTH DAKOTA ASSOCIATION OF PLUMBING-HEATING-COOLING CONTRACTORS (ACTIVE)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=112225042023247175034250060152201008157037154141</link>
-      <description>ALL MATTERS DEALING WITH PLUMBING, HEATING AND COOLING</description>
-      <pubDate>Wed, 22 Jan 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">112225042023247175034250060152201008157037154141</guid>
-    </item>
-        
-    <item>
-      <title>Lobbyist registration: KASEY ENTWISLE (ACTIVE) for PITBULL ACRES LLC (PENDING AUTHORIZATION)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=024156167053126186116129167225211173184127065062</link>
-      <description>CANNABIS</description>
-      <pubDate>Wed, 22 Jan 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">024156167053126186116129167225211173184127065062</guid>
-    </item>
-        
-    <item>
-      <title>Lobbyist registration: NIKOLAS NARTOWICZ (ACTIVE) for AMERICANS UNITED FOR SEPARATION OF CHURCH AND STATE (ACTIVE)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=011057225094109000177022062172202081124059106194</link>
-      <description>EDUCATION, RELIGIOUS FREEDOM</description>
-      <pubDate>Wed, 22 Jan 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">011057225094109000177022062172202081124059106194</guid>
-    </item>
-        
-    <item>
-      <title>Lobbyist registration: EMMETT REISTROFFER (ACTIVE) for GENESIS FARMS LLC (PENDING AUTHORIZATION)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=177194202033242132037037138014045246121066021066</link>
-      <description>N/A AT THIS TIME</description>
-      <pubDate>Wed, 22 Jan 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">177194202033242132037037138014045246121066021066</guid>
-    </item>
-        
-    <item>
-      <title>Lobbyist registration: R. SHAWN TORNOW (ACTIVE) for PROTECT SESD PROPERTY RIGHTS (PENDING AUTHORIZATION)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=169037034025209032185101018051165217155005195005</link>
-      <description>OVERSIGHT FOR PROTECTION OF PERSONS CONSTITUTIONAL RIGHTS INCLUDING, BUT NOT LIMITED TO, PRIVATE PROPERTY RIGHTS OF ALL SOUTH DAKOTANS.</description>
-      <pubDate>Wed, 22 Jan 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">169037034025209032185101018051165217155005195005</guid>
-    </item>
-        
-    <item>
-      <title>Lobbyist registration: LISA GENNARO (ACTIVE) for PROTECTING SOUTH DAKOTA KIDS INC. (PENDING AUTHORIZATION)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=024026180028237116040026035196232118253159194062</link>
-      <description>PARENTAL RIGHTS, MARIJUANA, EDUCATION,, LIFE/YOUTH</description>
-      <pubDate>Wed, 22 Jan 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">024026180028237116040026035196232118253159194062</guid>
-    </item>
-        
-    <item>
-      <title>Lobbyist registration: JORDAN D MASON (ACTIVE) for SOUTH DAKOTA RETAILERS FOR BETTER ALTERNATIVES (PENDING AUTHORIZATION)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=001029162146178065053025231025086255063185068058</link>
-      <description>VAPING INDUSTRY, ALTERNATIVE PRODUCTS</description>
-      <pubDate>Wed, 22 Jan 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">001029162146178065053025231025086255063185068058</guid>
-    </item>
-        
-    <item>
-      <title>Lobbyist registration: ALEX RUSSO (ACTIVE) for FLATLAND FLYWAYS (PENDING AUTHORIZATION)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=179179220232085003024243227210217022042015250101</link>
-      <description>VETERAN'S AFFAIRS/ WATERFOWL HUNTING</description>
-      <pubDate>Tue, 21 Jan 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">179179220232085003024243227210217022042015250101</guid>
-    </item>
-        
-    <item>
-      <title>Lobbyist registration: CODI GREGG (ACTIVE) for SOUTH DAKOTA 811 (ACTIVE)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=064230153139195057111165158199010206222095150136</link>
-      <description>SOUTH DAKOTA 811 LAWS AND ADMIN RULES, CONNECTION TO DPS</description>
-      <pubDate>Tue, 21 Jan 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">064230153139195057111165158199010206222095150136</guid>
+      <title>Lobbyist registration: NANCY D HILDING (ACTIVE) for PRAIRIE HILLS AUDUBON SOCIETY OF WESTERN SD (ACTIVE)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=004085220119186167070252006174252125086075192076</link>
+      <description>ENVIRONMENT, SUSTAINABILITY, BIODIVERSITY, WILDLIFE, OUTDOOR RECREATION, HISTORIC PRESERVATION, GOOD GOVERNMENT, LAND USE</description>
+      <pubDate>Mon, 27 Jan 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">004085220119186167070252006174252125086075192076</guid>
     </item>
         
   </channel>
