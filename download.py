@@ -1095,7 +1095,7 @@ if __name__ == '__main__':
 
     # refresh_detail_pages()
 
-    # download_pdfs()
+    download_pdfs()
 
     print('\nProcessing public lobbyist file ...')
     public_lobbyists = ResultsPDF(
