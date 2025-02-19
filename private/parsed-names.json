@@ -11384,5 +11384,21 @@
         "name_first": "TAMAR",
         "name_last": "LIEBERMAN",
         "name_full": "TAMAR LIEBERMAN"
+    },
+    "IVAN ROMERO": {
+        "name_first": "IVAN",
+        "name_last": "ROMERO",
+        "name_full": "IVAN ROMERO"
+    },
+    "WILLIAM COGGIN": {
+        "name_first": "WILLIAM",
+        "name_last": "COGGIN",
+        "name_full": "WILLIAM COGGIN"
+    },
+    "ALAN BRONSON SMITH": {
+        "name_first": "ALAN",
+        "name_middle": "BRONSON",
+        "name_last": "SMITH",
+        "name_full": "ALAN BRONSON SMITH"
     }
 }
