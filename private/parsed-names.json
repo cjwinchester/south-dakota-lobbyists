@@ -11400,5 +11400,21 @@
         "name_middle": "BRONSON",
         "name_last": "SMITH",
         "name_full": "ALAN BRONSON SMITH"
+    },
+    "STEVE S. SIEGEL": {
+        "name_first": "STEVE",
+        "name_middle": "S.",
+        "name_last": "SIEGEL",
+        "name_full": "STEVE S. SIEGEL"
+    },
+    "MATTHEW HELDER": {
+        "name_first": "MATTHEW",
+        "name_last": "HELDER",
+        "name_full": "MATTHEW HELDER"
+    },
+    "HARRISON HEMS": {
+        "name_first": "HARRISON",
+        "name_last": "HEMS",
+        "name_full": "HARRISON HEMS"
     }
 }

@@ -5,55 +5,39 @@
     <link>https://github.comcjwinchester/south-dakota-lobbyists</link>
     <description>An RSS feed that flags new registrations and financial disclosures of private lobbyists in South Dakota.</description>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Feb 2025 13:41:15 -0000</lastBuildDate>
+    <lastBuildDate>Fri, 21 Feb 2025 19:46:33 -0000</lastBuildDate>
     <atom:link href="https://raw.githubusercontent.com/cjwinchester/south-dakota-lobbyists/refs/heads/main/south-dakota-lobbyists.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Lobbyist registration: ALAN BRONSON SMITH (ACTIVE) for R STREET INSTITUTE (PENDING AUTHORIZATION)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=065032152249054211132036094110207187193241117104</link>
-      <description>TECHNOLOGY, ENERGY, INSURANCE, CRIMINAL JUSTICE</description>
-      <pubDate>Wed, 19 Feb 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">065032152249054211132036094110207187193241117104</guid>
+      <title>Lobbyist registration: STEVE S. SIEGEL (ACTIVE) for HENRY CARLSON COMPANY (PENDING AUTHORIZATION)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=153013013007172250216044164041136135090209098207</link>
+      <description>PRISONS</description>
+      <pubDate>Fri, 21 Feb 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">153013013007172250216044164041136135090209098207</guid>
     </item>
         
     <item>
-      <title>Lobbyist registration: CHRIS JOHNSON (ACTIVE) for ALLIANCE FOR RESPONSIBLE CONSUMER LEGAL FUNDING (ACTIVE)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=081225236043089027190181101193117222213029119039</link>
-      <description>LITIGATION FINANCING</description>
-      <pubDate>Wed, 19 Feb 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">081225236043089027190181101193117222213029119039</guid>
+      <title>Lobbyist registration: JENNIFER STALLEY (ACTIVE) for HENRY CARLSON COMPANY (PENDING AUTHORIZATION)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=005123111219136195175128210162081043033249244054</link>
+      <description>PRISONS</description>
+      <pubDate>Fri, 21 Feb 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">005123111219136195175128210162081043033249244054</guid>
     </item>
         
     <item>
-      <title>Lobbyist registration: MADISON STRAND (ACTIVE) for FARM CREDIT SERVICES OF AMERICA (ACTIVE)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=162204182124201192009015038030187094134189026243</link>
-      <description>ALL SUBJECT MATTERS OF INTEREST TO THE COOPERATIVE</description>
-      <pubDate>Wed, 19 Feb 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">162204182124201192009015038030187094134189026243</guid>
+      <title>Lobbyist registration: MITCH RICHTER (ACTIVE) for HENRY CARLSON COMPANY (PENDING AUTHORIZATION)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=205057044147137072139127086199143134185255250096</link>
+      <description>PRISONS</description>
+      <pubDate>Fri, 21 Feb 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">205057044147137072139127086199143134185255250096</guid>
     </item>
         
     <item>
-      <title>Lobbyist registration: WILLIAM COGGIN (ACTIVE) for BERMAN AND COMPANY (PENDING AUTHORIZATION)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=021246211039211140018170065165194164164117017155</link>
-      <description>LAB-GROWN MEAT</description>
-      <pubDate>Tue, 18 Feb 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">021246211039211140018170065165194164164117017155</guid>
-    </item>
-        
-    <item>
-      <title>Lobbyist registration: DYLAN WHEELER (ACTIVE) for SANFORD HEALTH (ACTIVE)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=220073069209240228034202006246015069166104245177</link>
-      <description>HEALTH CARE AND HEALTH INSURANCE</description>
-      <pubDate>Tue, 18 Feb 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">220073069209240228034202006246015069166104245177</guid>
-    </item>
-        
-    <item>
-      <title>Lobbyist registration: IVAN ROMERO (ACTIVE) for SOUTH DAKOTA HISPANIC CHAMBER OF COMMERCE (ACTIVE)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=217164144225152244162184180018013101025184156026</link>
-      <description>THE GROWTH AND PROSPERITY OF THE BUSINESS LANDSCAPE IN THE LATINO COMMUNITY.</description>
-      <pubDate>Mon, 17 Feb 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">217164144225152244162184180018013101025184156026</guid>
+      <title>Lobbyist registration: HARRISON HEMS (ACTIVE) for HERITAGE ACTION FOR AMERICA (ACTIVE)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=003190051163138045244219183249068062212146242205</link>
+      <description>EDUCATION, ELECTIONS</description>
+      <pubDate>Thu, 20 Feb 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">003190051163138045244219183249068062212146242205</guid>
     </item>
         
   </channel>
