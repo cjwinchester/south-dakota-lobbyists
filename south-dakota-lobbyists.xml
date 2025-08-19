@@ -2,18 +2,146 @@
   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>South Dakota lobbyists</title>
-    <link>https://github.comcjwinchester/south-dakota-lobbyists</link>
+    <link>https://github.com/cjwinchester/south-dakota-lobbyists</link>
     <description>An RSS feed that flags new registrations and financial disclosures of private lobbyists in South Dakota.</description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 15 Mar 2025 17:38:59 -0000</lastBuildDate>
+    <lastBuildDate>Mon, 18 Aug 2025 21:09:08 -0000</lastBuildDate>
     <atom:link href="https://raw.githubusercontent.com/cjwinchester/south-dakota-lobbyists/refs/heads/main/south-dakota-lobbyists.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Lobbyist registration: MIZRAIM CORDERO (ACTIVE) for UNITED AIRLINES INC. (ACTIVE)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=011173119122234047093061003112091040153021084121</link>
-      <description>ISSUES IMPACTING COMMERCIAL AVIATION.</description>
-      <pubDate>Tue, 11 Mar 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">011173119122234047093061003112091040153021084121</guid>
+      <title>Lobbyist registration: MATT MCCAULLEY (ACTIVE) for J.E. DUNN-HENRY CARLSON CONSTR. JV (ACTIVE)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=171153118186134077162099184137016163142016034015</link>
+      <description>ALL SUBJECT MATTERS OF INTEREST TO THE JOINT VENTURE</description>
+      <pubDate>Tue, 05 Aug 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">171153118186134077162099184137016163142016034015</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist registration: T.J. NELSON (ACTIVE) for J.E. DUNN-HENRY CARLSON CONSTR. JV (ACTIVE)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=155012072153057108169121226070074111138250173127</link>
+      <description>ALL SUBJECT MATTERS OF INTEREST TO THE JOINT VENTURE</description>
+      <pubDate>Tue, 05 Aug 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">155012072153057108169121226070074111138250173127</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist registration: GRACE BECK (ACTIVE) for J.E. DUNN-HENRY CARLSON CONSTR. JV (ACTIVE)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=012018088165019218107126051166188172013032166220</link>
+      <description>ALL SUBJECT MATTERS OF INTEREST TO THE JOINT VENTURE</description>
+      <pubDate>Tue, 05 Aug 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">012018088165019218107126051166188172013032166220</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist registration: CHAD PETERSON (ACTIVE) for J.E. DUNN-HENRY CARLSON CONSTR. JV (ACTIVE)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=073149170105062116180100072207238236021111083169</link>
+      <description>ALL SUBJECT MATTERS OF INTEREST TO THE JOINT VENTURE</description>
+      <pubDate>Tue, 05 Aug 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">073149170105062116180100072207238236021111083169</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist registration: CHESNEY GARNOS (ACTIVE) for J.E. DUNN-HENRY CARLSON CONSTR. JV (ACTIVE)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=076065232163239009072233094219253048136110160140</link>
+      <description>ALL SUBJECT MATTERS OF INTEREST TO THE JOINT VENTURE</description>
+      <pubDate>Tue, 05 Aug 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">076065232163239009072233094219253048136110160140</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist registration: NICK PHILLIPS (ACTIVE) for APPLIED DIGITAL CORPORATION (ACTIVE)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=219107123222163094094088221079080222191188105161</link>
+      <description>DATA CENTERS</description>
+      <pubDate>Fri, 01 Aug 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">219107123222163094094088221079080222191188105161</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist registration: ASHLEE MULLENBACH (ACTIVE) for NATIONWIDE MUTUAL INSURANCE COMPANY (ACTIVE)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=125106009206134067166018167141074226109138196199</link>
+      <description>INSURANCE</description>
+      <pubDate>Fri, 01 Aug 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">125106009206134067166018167141074226109138196199</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist registration: MIKE MUELLER (ACTIVE) for FRIENDS OF SDPB (PENDING AUTHORIZATION)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=052008212087046247074037125092234049170179080100</link>
+      <description>PUBLIC BROADCASTING</description>
+      <pubDate>Wed, 23 Jul 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">052008212087046247074037125092234049170179080100</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist registration: RYAN HOWLETT (ACTIVE) for FRIENDS OF SDPB (PENDING AUTHORIZATION)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=034212008022127205186014218011238229184036138185</link>
+      <description>PUBLIC BROADCASTING</description>
+      <pubDate>Wed, 23 Jul 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">034212008022127205186014218011238229184036138185</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist registration: EMILY MCGANN (ACTIVE) for PHARMACEUTICAL RESEARCH AND MANUFACTURERS OF AMERICA (ACTIVE)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=008047166013224155202086025027143075201180189188</link>
+      <description>ALL MATTERS AFFECTING THE PHARMACEUTICAL INDUSTRY.</description>
+      <pubDate>Tue, 22 Jul 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">008047166013224155202086025027143075201180189188</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist registration: PAUL LAGEMANN (ACTIVE) for HERITAGE ACTION FOR AMERICA (ACTIVE)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=050021092071054076188215095211118022250234066070</link>
+      <description>EDUCATION, ELECTIONS</description>
+      <pubDate>Tue, 22 Jul 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">050021092071054076188215095211118022250234066070</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist registration: JESSICA LYNCH (ACTIVE) for PHARMACEUTICAL RESEARCH AND MANUFACTURERS OF AMERICA (ACTIVE)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=082190046255109145210060177098179211087179025163</link>
+      <description>ALL MATTERS AFFECTING THE PHARMACEUTICAL INDUSTRY.</description>
+      <pubDate>Tue, 22 Jul 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">082190046255109145210060177098179211087179025163</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist registration: RYAN IRSIK (ACTIVE) for WALMART INC. (ACTIVE)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=088089003149086177245148074054127105229026201095</link>
+      <description>RETAIL</description>
+      <pubDate>Tue, 22 Jul 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">088089003149086177245148074054127105229026201095</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist registration: ASHLEE MULLENBACH (ACTIVE) for NATIONWIDE MUTUAL INSURANCE COMPANY (PENDING AUTHORIZATION)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=097243188202126106111117027225148221042096172089</link>
+      <description>INSURANCE</description>
+      <pubDate>Fri, 18 Jul 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">097243188202126106111117027225148221042096172089</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist registration: NICK PHILLIPS (ACTIVE) for APPLIED DIGITAL CORPORATION (ACTIVE)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=105084197106112165171214130106119230138103113100</link>
+      <description>DATA CENTERS</description>
+      <pubDate>Fri, 13 Jun 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">105084197106112165171214130106119230138103113100</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist filing B0370-4928: Lobbyist Expense Report filed by NICK PHILLIPS for APPLIED DIGITAL CORPORATION</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Business/ImageDownload.aspx?id=132076254053148206013036096043242104255120155083</link>
+      <description>None</description>
+      <pubDate>Mon, 07 Jul 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">132076254053148206013036096043242104255120155083</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist filing B0075-8924: Employer Expense Report filed by NICK PHILLIPS for APPLIED DIGITAL CORPORATION</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Business/ImageDownload.aspx?id=205221057099149040251213169048072188117119184215</link>
+      <description>None</description>
+      <pubDate>Fri, 11 Jul 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">205221057099149040251213169048072188117119184215</guid>
     </item>
         
   </channel>
