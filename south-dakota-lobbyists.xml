@@ -5,143 +5,263 @@
     <link>https://github.com/cjwinchester/south-dakota-lobbyists</link>
     <description>An RSS feed that flags new registrations and financial disclosures of private lobbyists in South Dakota.</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 18 Aug 2025 21:09:08 -0000</lastBuildDate>
+    <lastBuildDate>Mon, 03 Nov 2025 09:14:49 -0000</lastBuildDate>
     <atom:link href="https://raw.githubusercontent.com/cjwinchester/south-dakota-lobbyists/refs/heads/main/south-dakota-lobbyists.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Lobbyist registration: MATT MCCAULLEY (ACTIVE) for J.E. DUNN-HENRY CARLSON CONSTR. JV (ACTIVE)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=171153118186134077162099184137016163142016034015</link>
-      <description>ALL SUBJECT MATTERS OF INTEREST TO THE JOINT VENTURE</description>
-      <pubDate>Tue, 05 Aug 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">171153118186134077162099184137016163142016034015</guid>
+      <title>Lobbyist registration: JENNIFER STALLEY (ACTIVE) for CHILDREN'S HOME SOCIETY (PENDING AUTHORIZATION)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=100021240107159117111029076136123149167230231054</link>
+      <description>HEALTHCARE, CHILDREN'S ISSUES, DOMESTIC VIOLENCE, EDUCATION</description>
+      <pubDate>Sun, 02 Nov 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">100021240107159117111029076136123149167230231054</guid>
     </item>
         
     <item>
-      <title>Lobbyist registration: T.J. NELSON (ACTIVE) for J.E. DUNN-HENRY CARLSON CONSTR. JV (ACTIVE)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=155012072153057108169121226070074111138250173127</link>
-      <description>ALL SUBJECT MATTERS OF INTEREST TO THE JOINT VENTURE</description>
-      <pubDate>Tue, 05 Aug 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">155012072153057108169121226070074111138250173127</guid>
+      <title>Lobbyist registration: JENNIFER STALLEY (ACTIVE) for LIFESCAPE (PENDING AUTHORIZATION)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=052098224244115179096139058089073067038109122062</link>
+      <description>HEALTHCARE, CHILDREN'S ISSUES, EDCUATION</description>
+      <pubDate>Sun, 02 Nov 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">052098224244115179096139058089073067038109122062</guid>
     </item>
         
     <item>
-      <title>Lobbyist registration: GRACE BECK (ACTIVE) for J.E. DUNN-HENRY CARLSON CONSTR. JV (ACTIVE)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=012018088165019218107126051166188172013032166220</link>
-      <description>ALL SUBJECT MATTERS OF INTEREST TO THE JOINT VENTURE</description>
-      <pubDate>Tue, 05 Aug 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">012018088165019218107126051166188172013032166220</guid>
+      <title>Lobbyist registration: JENNIFER STALLEY (ACTIVE) for COMMUNITY HEALTHCARE ASSOCIATION OF THE DAKOTAS (PENDING AUTHORIZATION)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=148057219024034170239197150192123235209028170215</link>
+      <description>HEALTHCARE, PUBLIC HEALTH, CHILDCARE, WORKFORCE</description>
+      <pubDate>Sun, 02 Nov 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">148057219024034170239197150192123235209028170215</guid>
     </item>
         
     <item>
-      <title>Lobbyist registration: CHAD PETERSON (ACTIVE) for J.E. DUNN-HENRY CARLSON CONSTR. JV (ACTIVE)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=073149170105062116180100072207238236021111083169</link>
-      <description>ALL SUBJECT MATTERS OF INTEREST TO THE JOINT VENTURE</description>
-      <pubDate>Tue, 05 Aug 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">073149170105062116180100072207238236021111083169</guid>
+      <title>Lobbyist registration: JENNIFER STALLEY (ACTIVE) for ELDER VOICE ADVOCATES (PENDING AUTHORIZATION)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=045113167174153000083045193138202201108102015055</link>
+      <description>ELDER ISSUES, HEALTHCARE, CONSUMER PROTECTION</description>
+      <pubDate>Sun, 02 Nov 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">045113167174153000083045193138202201108102015055</guid>
     </item>
         
     <item>
-      <title>Lobbyist registration: CHESNEY GARNOS (ACTIVE) for J.E. DUNN-HENRY CARLSON CONSTR. JV (ACTIVE)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=076065232163239009072233094219253048136110160140</link>
-      <description>ALL SUBJECT MATTERS OF INTEREST TO THE JOINT VENTURE</description>
-      <pubDate>Tue, 05 Aug 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">076065232163239009072233094219253048136110160140</guid>
+      <title>Lobbyist registration: JENNIFER STALLEY (ACTIVE) for AMERICAN HEART ASSOCIATION (ACTIVE)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=167123088173155245165053059060045063073090114105</link>
+      <description>HEALTH, ACCESS TO CARE, CHILDCARE, TOBACCO</description>
+      <pubDate>Sat, 01 Nov 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">167123088173155245165053059060045063073090114105</guid>
     </item>
         
     <item>
-      <title>Lobbyist registration: NICK PHILLIPS (ACTIVE) for APPLIED DIGITAL CORPORATION (ACTIVE)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=219107123222163094094088221079080222191188105161</link>
-      <description>DATA CENTERS</description>
-      <pubDate>Fri, 01 Aug 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">219107123222163094094088221079080222191188105161</guid>
+      <title>Lobbyist registration: JENNIFER STALLEY (ACTIVE) for BOYS &#x26; GIRLS CLUBS SOUTH DAKOTA ALLIANCE (PENDING AUTHORIZATION)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=238255144162138190247250178124040200139176096127</link>
+      <description>YOUTH, EDUCATION, JUVENILE JUSTICE, CHILDCARE</description>
+      <pubDate>Sat, 01 Nov 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">238255144162138190247250178124040200139176096127</guid>
     </item>
         
     <item>
-      <title>Lobbyist registration: ASHLEE MULLENBACH (ACTIVE) for NATIONWIDE MUTUAL INSURANCE COMPANY (ACTIVE)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=125106009206134067166018167141074226109138196199</link>
+      <title>Lobbyist registration: JENNIFER STALLEY (ACTIVE) for SOUTH DAKOTA VETERINARY MEDICAL ASSOCIATION (PENDING AUTHORIZATION)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=059248198185021203093037188236139161032154108047</link>
+      <description>VETERINARY MEDICINE, AGRICULUTURE</description>
+      <pubDate>Sat, 01 Nov 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">059248198185021203093037188236139161032154108047</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist registration: RICK L WILLIAMSON (ACTIVE) for VETERANS OF FOREIGN WARS (PENDING AUTHORIZATION)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=025212046212026182061232212239104052163099091101</link>
+      <description>VETERANS AND MILITARY SUPPORT</description>
+      <pubDate>Fri, 31 Oct 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">025212046212026182061232212239104052163099091101</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist registration: MELISSA MCCAULEY (ACTIVE) for SOUTH DAKOTA VOICES FOR JUSTICE (PENDING AUTHORIZATION)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=171001246180193099248152135186077047194163147246</link>
+      <description>IMMIGRATION; FOOD SECURITY; LANGUAGE ACCESS; CHILDREN'S RIGHTS; HEALTHCARE ACCESS</description>
+      <pubDate>Thu, 30 Oct 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">171001246180193099248152135186077047194163147246</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist registration: DENISE HANZLIK (ACTIVE) for SOUTH DAKOTA MULTI HOUSING ASSOCIATION (ACTIVE)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=124029144184090017172108125015098013188113188145</link>
+      <description>HOUSING, REAL ESTATE TAX, TENANT, LANDLORD.</description>
+      <pubDate>Tue, 28 Oct 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">124029144184090017172108125015098013188113188145</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist registration: BRANDON GEIB (ACTIVE) for WELLMARK BLUE CROSS AND BLUE SHIELD (ACTIVE)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=083168205244169085243147093211043074062250223078</link>
+      <description>HEALTH CARE</description>
+      <pubDate>Tue, 28 Oct 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">083168205244169085243147093211043074062250223078</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist registration: MELISSA KLEMANN (ACTIVE) for WELLMARK BLUE CROSS AND BLUE SHIELD (ACTIVE)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=163189073126056215252175054078235078120031038104</link>
+      <description>HEALTH CARE</description>
+      <pubDate>Tue, 28 Oct 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">163189073126056215252175054078235078120031038104</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist registration: MIKE CHRYSLER (ACTIVE) for INDEPENDENT INSURANCE AGENTS OF SOUTH DAKOTA (ACTIVE)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=222099235102169033207026071086094139255008186074</link>
       <description>INSURANCE</description>
-      <pubDate>Fri, 01 Aug 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">125106009206134067166018167141074226109138196199</guid>
+      <pubDate>Tue, 28 Oct 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">222099235102169033207026071086094139255008186074</guid>
     </item>
         
     <item>
-      <title>Lobbyist registration: MIKE MUELLER (ACTIVE) for FRIENDS OF SDPB (PENDING AUTHORIZATION)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=052008212087046247074037125092234049170179080100</link>
-      <description>PUBLIC BROADCASTING</description>
-      <pubDate>Wed, 23 Jul 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">052008212087046247074037125092234049170179080100</guid>
+      <title>Lobbyist registration: ILANA BELLER-KERNISH (ACTIVE) for PUBLIC CITIZEN INC. (PENDING AUTHORIZATION)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=120025113183247090113080101169081125181241052227</link>
+      <description>ARTIFICIAL INTELLIGENCE</description>
+      <pubDate>Tue, 28 Oct 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">120025113183247090113080101169081125181241052227</guid>
     </item>
         
     <item>
-      <title>Lobbyist registration: RYAN HOWLETT (ACTIVE) for FRIENDS OF SDPB (PENDING AUTHORIZATION)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=034212008022127205186014218011238229184036138185</link>
-      <description>PUBLIC BROADCASTING</description>
-      <pubDate>Wed, 23 Jul 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">034212008022127205186014218011238229184036138185</guid>
+      <title>Lobbyist registration: DENNIS LYNN DAVIS (ACTIVE) for SOUTH DAKOTANS OPPOSED TO THE DEATH PENALTY (ACTIVE)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=243113031201230245245169080149248103225164153205</link>
+      <description>TO ENACT LEGISLATION TO REPEAL THE DEATH PENALTY IN SOUTH DAKOTA AS WELL AS LEGISLATION FOR PRISON REFORM.</description>
+      <pubDate>Tue, 28 Oct 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">243113031201230245245169080149248103225164153205</guid>
     </item>
         
     <item>
-      <title>Lobbyist registration: EMILY MCGANN (ACTIVE) for PHARMACEUTICAL RESEARCH AND MANUFACTURERS OF AMERICA (ACTIVE)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=008047166013224155202086025027143075201180189188</link>
-      <description>ALL MATTERS AFFECTING THE PHARMACEUTICAL INDUSTRY.</description>
-      <pubDate>Tue, 22 Jul 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">008047166013224155202086025027143075201180189188</guid>
+      <title>Lobbyist registration: TONY BURKE (ACTIVE) for AMERICAN HEART ASSOCIATION (ACTIVE)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=070226078063228241234159176052229076188058086016</link>
+      <description>CERPS, SOC, NUTRITION, ACCESS TO CARE, COMMERCIAL TOBACCO, ETC.</description>
+      <pubDate>Tue, 28 Oct 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">070226078063228241234159176052229076188058086016</guid>
     </item>
         
     <item>
-      <title>Lobbyist registration: PAUL LAGEMANN (ACTIVE) for HERITAGE ACTION FOR AMERICA (ACTIVE)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=050021092071054076188215095211118022250234066070</link>
-      <description>EDUCATION, ELECTIONS</description>
-      <pubDate>Tue, 22 Jul 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">050021092071054076188215095211118022250234066070</guid>
+      <title>Lobbyist registration: AMY IVERSEN (ACTIVE) for SOUTH DAKOTA COUNCIL OF COMMUNITY BEHAVIORAL HEALTH INC. (ACTIVE)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=142021222159015165027095036036207221162120118101</link>
+      <description>MENTAL HEALTH/HEALTHCARE</description>
+      <pubDate>Tue, 28 Oct 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">142021222159015165027095036036207221162120118101</guid>
     </item>
         
     <item>
-      <title>Lobbyist registration: JESSICA LYNCH (ACTIVE) for PHARMACEUTICAL RESEARCH AND MANUFACTURERS OF AMERICA (ACTIVE)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=082190046255109145210060177098179211087179025163</link>
-      <description>ALL MATTERS AFFECTING THE PHARMACEUTICAL INDUSTRY.</description>
-      <pubDate>Tue, 22 Jul 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">082190046255109145210060177098179211087179025163</guid>
+      <title>Lobbyist registration: DANIEL J WOLTER (ACTIVE) for HY-VEE, INC. (ACTIVE)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=113087251221021253063044040252046148191101134058</link>
+      <description>BUSINESS ISSUES, TAXES, PHARMACY, LIQUOR REGULATION, LABOR ISSUES</description>
+      <pubDate>Mon, 27 Oct 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">113087251221021253063044040252046148191101134058</guid>
     </item>
         
     <item>
-      <title>Lobbyist registration: RYAN IRSIK (ACTIVE) for WALMART INC. (ACTIVE)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=088089003149086177245148074054127105229026201095</link>
-      <description>RETAIL</description>
-      <pubDate>Tue, 22 Jul 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">088089003149086177245148074054127105229026201095</guid>
+      <title>Lobbyist registration: JOSH ANDERSON (ACTIVE) for CHRISTENSEN FARMS &#x26; FEEDLOTS, INC (ACTIVE)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=210129105239113194037124116188104076104086227108</link>
+      <description>AGRICULTURE</description>
+      <pubDate>Mon, 27 Oct 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">210129105239113194037124116188104076104086227108</guid>
     </item>
         
     <item>
-      <title>Lobbyist registration: ASHLEE MULLENBACH (ACTIVE) for NATIONWIDE MUTUAL INSURANCE COMPANY (PENDING AUTHORIZATION)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=097243188202126106111117027225148221042096172089</link>
-      <description>INSURANCE</description>
-      <pubDate>Fri, 18 Jul 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">097243188202126106111117027225148221042096172089</guid>
+      <title>Lobbyist registration: STEVE WILLARD (ACTIVE) for SOUTH DAKOTA ELECTRIC UTILITY COMPANIES (ACTIVE)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=207158144188116015047040223094050013177179067024</link>
+      <description>ENERGY AND RELATED BUSINESS MATTERS</description>
+      <pubDate>Mon, 27 Oct 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">207158144188116015047040223094050013177179067024</guid>
     </item>
         
     <item>
-      <title>Lobbyist registration: NICK PHILLIPS (ACTIVE) for APPLIED DIGITAL CORPORATION (ACTIVE)</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=105084197106112165171214130106119230138103113100</link>
-      <description>DATA CENTERS</description>
-      <pubDate>Fri, 13 Jun 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">105084197106112165171214130106119230138103113100</guid>
+      <title>Lobbyist registration: THERESA KRIESE (ACTIVE) for MITCHELL TECHNICAL COLLEGE (PENDING AUTHORIZATION)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=245165049235058051043081040193185108046172152161</link>
+      <description>EDUCATION FUNDING AND POLICY</description>
+      <pubDate>Mon, 27 Oct 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">245165049235058051043081040193185108046172152161</guid>
     </item>
         
     <item>
-      <title>Lobbyist filing B0370-4928: Lobbyist Expense Report filed by NICK PHILLIPS for APPLIED DIGITAL CORPORATION</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Business/ImageDownload.aspx?id=132076254053148206013036096043242104255120155083</link>
-      <description>None</description>
-      <pubDate>Mon, 07 Jul 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">132076254053148206013036096043242104255120155083</guid>
+      <title>Lobbyist registration: MELISSA MCCAULEY (ACTIVE) for SOUTH DAKOTA VOICES FOR JUSTICE (ACTIVE)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=027161046213091057042140225213195124182000016070</link>
+      <description>HEALTH, AG, GOVERNMENT, HEALTH AND HUMAN SERVICES, EDUCATION, VOTING, VOTER REGISTRATION, BUDGETING,</description>
+      <pubDate>Mon, 27 Oct 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">027161046213091057042140225213195124182000016070</guid>
     </item>
         
     <item>
-      <title>Lobbyist filing B0075-8924: Employer Expense Report filed by NICK PHILLIPS for APPLIED DIGITAL CORPORATION</title>
-      <link>https://sosenterprise.sd.gov/BusinessServices/Business/ImageDownload.aspx?id=205221057099149040251213169048072188117119184215</link>
-      <description>None</description>
-      <pubDate>Fri, 11 Jul 2025 00:00:00 -0000</pubDate>
-      <guid isPermaLink="false">205221057099149040251213169048072188117119184215</guid>
+      <title>Lobbyist registration: MELISSA MCCAULEY (ACTIVE) for DAKOTA RURAL ACTION (PENDING AUTHORIZATION)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=168174255195181048116210134129152130250233229220</link>
+      <description>AG, EDUCATION, VOTING, VOTER RIGHTS, HEALTH AND HUMAN SERVICES, APPROPRIATIONS, GOVERNMENT,</description>
+      <pubDate>Mon, 27 Oct 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">168174255195181048116210134129152130250233229220</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist registration: STEVE WILLARD (ACTIVE) for SOUTH DAKOTA JOINT FIRE COUNCIL (PENDING AUTHORIZATION)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=206107037054123093248038147199242031089156098023</link>
+      <description>FIRE SERVICES &#x26; EMERGENCY / DISASTER SERVICES</description>
+      <pubDate>Mon, 27 Oct 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">206107037054123093248038147199242031089156098023</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist registration: BAILEY FROELICH (ACTIVE) for SOUTH DAKOTA STUDENT FEDERATION (PENDING AUTHORIZATION)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=041021178137141121136157212163067041022115164198</link>
+      <description>WE WILL BE LOBBYING ON BEHALF OF THE BOR STUDENT BODY AND ANYTHING IN CONJUNCTION WITH HIGHER EDUCATION.</description>
+      <pubDate>Tue, 07 Oct 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">041021178137141121136157212163067041022115164198</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist registration: SAMUEL LEE BRUMFIELD (ACTIVE) for SOUTH DAKOTA STUDENT FEDERATION (PENDING AUTHORIZATION)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=223178147153226147195037004209076142038189048005</link>
+      <description>AS THE STUDENT FEDERATION OF THE SOUTH DAKOTA, WE WILL PRIMARILY FOCUS ON ANY LEGISLATION THAT IS IN CONJUNCTION WITH HIGHER EDUCATION.</description>
+      <pubDate>Tue, 30 Sep 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">223178147153226147195037004209076142038189048005</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist registration: ERIC ERICKSON (ACTIVE) for SOUTH DAKOTA STATE'S ATTORNEYS ASSOCIATION (ACTIVE)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=092191099247207048050165178097205103041141125014</link>
+      <description>PUBLIC SAFETY MATTERS</description>
+      <pubDate>Tue, 23 Sep 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">092191099247207048050165178097205103041141125014</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist registration: ERIC ERICKSON (ACTIVE) for SOUTH DAKOTA ASSOCIATION OF COUNTY COMMISSIONERS (ACTIVE)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=189127252066059025013177030077235150083080053017</link>
+      <description>MATTERS IMPACTING COUNTIES</description>
+      <pubDate>Tue, 23 Sep 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">189127252066059025013177030077235150083080053017</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist registration: MELISSA MCCAULEY (ACTIVE) for SOUTH DAKOTA NETWORK AGAINST FAMILY VIOLENCE (ACTIVE)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=157126171016149070202241249064083050122222127102</link>
+      <description>DOMESTIC VIOLENCE, CHILDREN, HEALTH, JUDICIARY, GOVERNMENT, HUMAN SERVICES</description>
+      <pubDate>Tue, 23 Sep 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">157126171016149070202241249064083050122222127102</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist registration: MELISSA MCCAULEY (ACTIVE) for SOUTH DAKOTA FOR EQUITY (PENDING AUTHORIZATION)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=032214157017134102115226218244199177204153233138</link>
+      <description>HEALTH HUMAN SERVICES, VOTING, JUDICARY, EDUCATION, VOTING RIGHTS</description>
+      <pubDate>Tue, 23 Sep 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">032214157017134102115226218244199177204153233138</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist registration: JENNIFER STALLEY (ACTIVE) for ASSOCIATED GENERAL CONTRACTORS OF SOUTH DAKOTA (ACTIVE)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=072098122221151065036041204017111126209127074222</link>
+      <description>SPECIAL SESSION - PRISON PROJECT</description>
+      <pubDate>Mon, 22 Sep 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">072098122221151065036041204017111126209127074222</guid>
+    </item>
+        
+    <item>
+      <title>Lobbyist registration: YEHESUAH DOWNIE (ACTIVE) for CAMPAIGN LEGAL CENTER (ACTIVE)</title>
+      <link>https://sosenterprise.sd.gov/BusinessServices/Lobbyist/LobbyistRegistrationDetail.aspx?CN=200092122038035037199118099217098089177204088091</link>
+      <description>VOTING, ELECTIONS, VOTING RIGHTS RESTORATION</description>
+      <pubDate>Mon, 08 Sep 2025 00:00:00 -0000</pubDate>
+      <guid isPermaLink="false">200092122038035037199118099217098089177204088091</guid>
     </item>
         
   </channel>
