@@ -11610,5 +11610,16 @@
         "name_first": "ALLY",
         "name_last": "DAWES",
         "name_full": "ALLY DAWES"
+    },
+    "JANE P SCHROEDER": {
+        "name_first": "JANE",
+        "name_middle": "P",
+        "name_last": "SCHROEDER",
+        "name_full": "JANE P SCHROEDER"
+    },
+    "BRE SCHMIDT": {
+        "name_first": "BRE",
+        "name_last": "SCHMIDT",
+        "name_full": "BRE SCHMIDT"
     }
 }
